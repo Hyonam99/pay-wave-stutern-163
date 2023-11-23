@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
+    "baseUrl": "src",
     "lib": [
       "dom",
       "dom.iterable",
@@ -18,9 +19,21 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react"
+  },
+  "paths": {
+    "pages/*": ["./src/pages/*"],
+    "components/*": ["./src/components/*"]
   },
   "include": [
-    "src"
-  ]
+    "src", 
+    "jest.setup.js", 
+    "**/*.ts", 
+    "**/*.tsx", 
+    "jest.config.js", 
+    "src/components",
+    "src/pages",
+    "src/__test__"
+  ],
+  "exclude": ["node_modules"]
 }
