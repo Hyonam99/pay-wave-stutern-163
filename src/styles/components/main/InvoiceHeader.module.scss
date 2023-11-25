@@ -1,0 +1,50 @@
+@import "../../base-style";
+
+/**Styling the invoice page here, since style is minimal*/
+.invoice_page {
+    width: 100%;
+    margin-top: 4rem;
+}
+
+/**STYLES FOR THE INVOICE HEADER BEGIND HERE*/
+.container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.title {
+	font-size: clamp(1.6rem, 2vw, 2.1rem);
+	font-weight: bold;
+	color: var(--color-white);
+	margin-bottom: 0.5rem;
+}
+
+.count {
+	font-weight: 500;
+	font-size: 1.3rem;
+	line-height: 1.5rem;
+	color: var(--color-grayish-purple);
+}
+
+.left-area {
+	display: flex;
+	align-items: center;
+}
+
+/**MEDIA QUERY FOR THE INVOICE PAGE*/
+@media screen and (min-width: 1000px) {
+    .invoice_page { 
+        width: 80%;
+        margin-left: 5rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+}

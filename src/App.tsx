@@ -1,12 +1,31 @@
-import React from 'react';
-import style from './App.module.scss';
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import {
+	LandingPage,
+	Dashboard,
+	Login,
+	Register,
+	Customer,
+	CustomerDetail,
+	Invoices,
+	InvoiceDetail,
+	Profile,
+} from "pages";
 
 function App() {
-  return (
-    <div className={style.App}>
-      <h3>Pay-wave</h3>
-    </div>
-  );
+	return (
+		<Routes>
+			<Route path="/" element={<LandingPage />} />
+			<Route path="/login" element={<Login />} />
+			<Route path="/register" element={<Register />} />
+			<Route path="/dashboard" element={<Dashboard />} />
+			<Route path="/invoices" element={<Invoices />} />
+			<Route path="/invoice/:id" element={<InvoiceDetail />} />
+			<Route path="/customers" element={<Customer />} />
+			<Route path="/customer/:id" element={<CustomerDetail />} />
+			<Route path="/profile" element={<Profile />} />
+		</Routes>
+	);
 }
 
 export default App;

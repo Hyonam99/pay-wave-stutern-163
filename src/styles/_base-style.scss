@@ -1,11 +1,15 @@
 /** ***********************************************************************
 STYLE PALLETTE FOR PAY WAVE B2B.
 ***************************************************************************/
+@import "./mixins";
 
-$primary-color : hsl(173, 63%, 51%);
-$secondary-color : hsl(194, 100%, 57%);
+$primary-color : hsl(194, 100%, 57%);
+$primary-color-dark : #00a4d6;
+$icon-color : hsl(173, 63%, 51%);
+$secondary-color : hsl(194, 72%, 94%);
 $bg-dark : hsl(214, 91%, 9%);
 $text-color: hsl(212, 90%, 4%);
+$text-grey: hsl(212, 90%, 4%);
 $overlay-curtain : hsla(214, 91%, 9%, 0.5);
 $overlay-curtain-dark : hsla(214, 86%, 6%, 0.8);
 $white-color: hsl(0, 0%, 99%);

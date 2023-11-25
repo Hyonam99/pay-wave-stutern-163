@@ -1,0 +1,54 @@
+@import "../../base-style";
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: fit-content;
+    gap: 1.5rem;
+    padding: .4rem 1rem;
+    background-color: #ffffff;
+    
+    .toggle_Icon {
+        display: flex;
+        flex-grow: 1;
+        align-items: center;
+        justify-content: flex-end;
+    }
+}
+  
+  .mobile-hamburger {
+    display: block;
+  }
+  
+  .desktop-nav-links {
+    display: none;
+  }
+
+  .hidden {
+    display: none;
+  }
+  
+  /* Show on medium-sized screens and above */
+ 
+  @media (min-width: 768px) {
+    .desktop-nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .mobile-hamburger {
+      display: none; /* Hide by default */
+    }
+  }
+
+/* Add the responsive styling for lg breakpoint */
+@media (min-width: 992px) {
+    .navbar {
+
+        .toggle_Icon {
+            justify-content: center !important; 
+        }
+    }
+}

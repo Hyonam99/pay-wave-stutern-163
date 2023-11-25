@@ -1,0 +1,13 @@
+//convert static pixels values to rem, aids manual calculations
+@function toRem($value) {
+    $remValue: (calc($value / 16)) + rem;
+    @return $remValue;
+}
+
+/*custom styling for the background image containers*/
+@mixin bg-image-props {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+

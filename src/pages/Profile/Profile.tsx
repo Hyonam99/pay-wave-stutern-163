@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import AuthLayout from "layouts/AuthLayout";
-import { DashboardHeader } from "components";
-import style from "styles/components/main/Dashboardheader.module.scss"
 
-const Dashboard = () => {
+const Profile = () => {
 	const [isEmpty, setIsEmpty] = useState(false);
 	const invoices: string[] = [];
 
@@ -16,20 +14,27 @@ const Dashboard = () => {
 		<AuthLayout>
 
 			<motion.div
-				className={style.dashboard_page}
+				style={{
+					maxWidth: "73rem",
+					margin: "3rem auto",
+					padding: "0 24px",
+					minHeight: "89vh",
+					...(window.innerWidth >= 760 && { marginTop: "2rem" }),
+					...(window.innerWidth < 760 && { marginTop: "3rem" }),
+					...(window.innerWidth >= 1000 && { marginTop: "4rem", padding: 0 }),
+				}}
 				variants={pageVariants}
 				initial="hidden"
 				animate="visible"
 				exit="exit"
 			>
-				<DashboardHeader />
-				{isEmpty ? <span>EmptyPage dashboard Component</span>: <span>Dashboard component</span>}
+				{isEmpty ? <span>EmptyPage Profile Component</span>: <span>InvoicesList component</span>}
 			</motion.div>
 		</AuthLayout>
 	);
 };
 
-export default Dashboard;
+export default Profile;
 
 const pageVariants = {
 	hidden: {

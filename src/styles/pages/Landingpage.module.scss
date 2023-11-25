@@ -1,1 +1,53 @@
 @import "../base-style";
+
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+	text-align: center;
+}
+
+.main-title {
+	font-size: 4rem;
+	font-weight: bold;
+	color: $text-color;
+
+	.accent-text {
+		color: $primary-color;
+	}
+}
+
+.description-text {
+	max-width: 30rem;
+	line-height: 1.5;
+	font-size: 1rem;
+	color: $text-grey;
+    margin: 0;
+}
+
+.bold-accent-text {
+	font-size: 1.5rem;
+	font-weight: bold;
+	color: $primary-color;
+}
+
+@media screen and (max-width: 564px) {
+    .main-title {
+        font-size: 2.8rem;
+    }
+}
+
+@media screen and (max-width: 388px) {
+    .main-title {
+        font-size: 2rem;
+    }
+}
+
+@media screen and (max-width: 298px) {
+    .main-title {
+        font-size: 1.2rem;
+    }
+}
+

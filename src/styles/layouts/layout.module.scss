@@ -1,0 +1,35 @@
+@import "../base-style";
+
+/**STYLES THE BLANK LAYOUT HOC (Higher Order Component) */
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100svh;
+    font-family: var(--main-font);
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    flex-grow: 1;
+}
+
+/**STYLES THE AUTH LAYOUT HOC (Higher Order Component) */
+
+.auth_container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100svh;
+    font-family: var(--main-font);
+}
+
+.auth_main_content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    flex-grow: 1;
+    z-index: 1;
+}

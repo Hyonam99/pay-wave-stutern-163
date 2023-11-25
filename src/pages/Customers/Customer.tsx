@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import AuthLayout from "layouts/AuthLayout";
-import { DashboardHeader } from "components";
-import style from "styles/components/main/Dashboardheader.module.scss"
+import style from "styles/pages/customer.module.scss"
 
-const Dashboard = () => {
+const Customer = () => {
 	const [isEmpty, setIsEmpty] = useState(false);
 	const invoices: string[] = [];
 
@@ -15,21 +14,20 @@ const Dashboard = () => {
 	return (
 		<AuthLayout>
 
-			<motion.div
-				className={style.dashboard_page}
+			<motion.main
+				className={style.customer_page}
 				variants={pageVariants}
 				initial="hidden"
 				animate="visible"
 				exit="exit"
 			>
-				<DashboardHeader />
-				{isEmpty ? <span>EmptyPage dashboard Component</span>: <span>Dashboard component</span>}
-			</motion.div>
+				{isEmpty ? <span>EmptyPage customer Component</span>: <span>Customer component</span>}
+			</motion.main>
 		</AuthLayout>
 	);
 };
 
-export default Dashboard;
+export default Customer;
 
 const pageVariants = {
 	hidden: {

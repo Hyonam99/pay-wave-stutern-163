@@ -1,0 +1,195 @@
+@import '../../base-style';
+
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    padding: 3rem;
+    align-items: center;
+    justify-items: center;
+    background: $secondary-color;
+    color: $text-color;
+
+    .footer_text-content {
+        margin-bottom: .8rem;
+        article {
+
+            h1 {
+                text-transform: capitalize;
+                font-size: 2.2rem;
+                line-height: 68px;
+                margin: 0;
+                word-spacing: 1px;
+                text-align: center;
+                font-weight: 600;
+                
+            }
+
+            p {
+                font-size: 1rem;
+                margin: 0;
+                word-spacing: 1px;
+                text-align: center;
+            }
+        }
+    }
+
+    .footer_form {
+        width: 100%;
+        form {
+            .subscribe_form-wrapper {
+                display: flex;
+                flex-direction: row-reverse;
+                align-items:start;
+                width: fit-content;
+                margin: 0 auto;
+
+                button {
+                    position: absolute;
+                    border-radius: 0 7px 7px 0 !important;
+                    font-size: .8rem;
+                    padding: .934rem 2rem;
+                }
+            }
+            input[type="email"]{
+                border: 1px solid white;
+                width: 24rem !important;
+                color: black !important;
+                padding-right: 7rem !important;
+            }
+        }
+    }
+
+    .footer_signature {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        align-items: center;
+        width: 100%;
+
+        .footer_logo-short {
+            width: 40px;
+            height: 40px;
+        }
+
+        p {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .footer_media {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 1rem;
+            .footer_social-media_icons {
+                background: $icon-color;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                width: 26px;
+                height: 26px;
+                padding: .6rem;
+                border-radius: 50%;
+                cursor: pointer;
+
+                a {
+                    text-align: center;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    svg {
+                        font-size: 24px;
+                        fill: white;
+                    }
+                }
+            }
+        }
+    }
+
+    .footer-copyright {
+        
+        p {
+            font-size: 13px;
+            font-style: italic;
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .footer-container {
+        padding: 3rem 1rem;
+        align-items: flex-start;
+        justify-items: flex-start;
+    
+        .footer_text-content {
+            article {
+    
+                h1 {
+                    font-size: 2rem;
+                    line-height: 48px;
+                    text-align: left;                   
+                }
+    
+                p {
+                    text-align: left;
+                }
+            }
+        }
+    
+        .footer_form {
+            form {
+                .subscribe_form-wrapper {
+                    margin: 0;
+                }
+            }
+        }
+    
+        .footer_signature {
+            grid-template-columns:1fr;
+            margin-top: 1.1rem;
+
+            .footer_media {
+                justify-content: flex-start;
+            }
+        }
+
+    }
+}
+
+@media screen and (max-width: 578px) {
+    .footer-container {
+    
+        .footer_text-content {
+            margin-bottom: 1rem;
+            article {
+    
+                h1 {
+                    font-size: 1.7rem;                   
+                }
+    
+                p {
+                    font-size: .8rem;
+                }
+            }
+        }
+    
+        .footer_form {
+            form {
+                .subscribe_form-wrapper {
+    
+                    button {
+                        padding: .934rem 1rem;
+                    }
+                }
+                input[type="email"]{
+                    width: 100% !important;
+                }
+            }
+        }
+    
+        .footer_signature {
+            width: 100%;
+        }
+    }
+}
