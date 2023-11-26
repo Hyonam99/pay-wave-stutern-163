@@ -6,7 +6,7 @@ import { DecryptedToken } from 'interfaces/Types';
 export const AuthContext = createContext<{token: string | null, decryptedToken: DecryptedToken}>({token: "", decryptedToken: {userId: 0, exp: 0, iat: 0}});
 
 export const AuthProvider = ({ children }: {children: ReactNode}) => { 
-    const token = localStorage.getItem('maesanAdminToken')
+    const token = localStorage.getItem('paywave-token')
     let decryptedToken: DecryptedToken = {userId: 0, exp: 0, iat: 0}
     if (token) {
         decryptedToken = jwtDecode(token as string)

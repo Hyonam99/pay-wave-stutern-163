@@ -10,7 +10,6 @@ import { useNavigate } from "react-router-dom";
 import { useLogin } from "hooks/auth";
 
 const Login = () => {
-
     const navigate = useNavigate()
 	const {create, isLoading} = useLogin({
 		onSuccess(data: any) {
