@@ -1,15 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import AuthLayout from "layouts/AuthLayout";
 import style from "styles/pages/customer.module.scss"
+import { EmptyContent } from "components";
 
 const Customer = () => {
-	const [isEmpty, setIsEmpty] = useState(false);
-	const invoices: string[] = [];
-
-	useEffect(() => {
-		setIsEmpty(invoices.length === 0);
-	}, [invoices]);
 
 	return (
 		<AuthLayout>
@@ -21,7 +16,7 @@ const Customer = () => {
 				animate="visible"
 				exit="exit"
 			>
-				{isEmpty ? <span>EmptyPage customer Component</span>: <span>Customer component</span>}
+				<EmptyContent />
 			</motion.main>
 		</AuthLayout>
 	);

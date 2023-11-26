@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, {useState} from "react";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
@@ -9,10 +9,11 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import { AiOutlineLogout } from "react-icons/ai";
 import { MdNotificationsNone } from "react-icons/md";
+import { logoutBusiness } from "api/services";
 import { Link } from "react-router-dom";
 
 const CustomAvatar = () => {
-	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const open = Boolean(anchorEl);
 	const handleClick = (event: React.MouseEvent<HTMLElement>) => {
 		setAnchorEl(event.currentTarget);
@@ -20,6 +21,12 @@ const CustomAvatar = () => {
 	const handleClose = () => {
 		setAnchorEl(null);
 	};
+
+	const logOut = () => {
+		logoutBusiness()
+		window.location.replace("/")
+	}
+
 	return (
 		<>
 			<Box>
@@ -72,7 +79,7 @@ const CustomAvatar = () => {
 					Notifications
 				</MenuItem>
 				<Divider />
-				<MenuItem onClick={handleClose}>
+				<MenuItem onClick={() => {handleClose(); logOut()}}>
 					<ListItemIcon>
 						<AiOutlineLogout size={24} />
 					</ListItemIcon>

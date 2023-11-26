@@ -6,18 +6,24 @@ import { theme } from 'utils/theme'
 import "./index.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { ReactQueryProvider } from "providers/QueryProvider";
+import { AuthProvider } from "providers/AuthProvider";
 
 const root = ReactDOM.createRoot(
 	document.getElementById("root") as HTMLElement
 );
 root.render(
-	<React.StrictMode>
-		<BrowserRouter>
-			<ThemeProvider theme={theme}>
-				<App />
-			</ThemeProvider>
-		</BrowserRouter>
-	</React.StrictMode>
+	<ReactQueryProvider>
+		<AuthProvider>
+			<React.StrictMode>
+				<BrowserRouter>
+					<ThemeProvider theme={theme}>
+						<App />
+					</ThemeProvider>
+				</BrowserRouter>
+			</React.StrictMode>
+		</AuthProvider>
+	</ReactQueryProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

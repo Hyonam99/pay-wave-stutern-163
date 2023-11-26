@@ -1,8 +1,9 @@
 import React from 'react'
+import { EmptyContent } from "components";
 
 const InvoiceDetail = () => {
   return (
-    <div>InvoiceDetail</div>
+    <div><EmptyContent /></div>
   )
 }
 

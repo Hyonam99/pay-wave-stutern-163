@@ -1,16 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
-import { InvoiceHeader } from "components";
+import { InvoiceHeader, InvoiceList } from "components";
 import AuthLayout from "layouts/AuthLayout";
 import style from "styles/components/main/InvoiceHeader.module.scss"
 
 const Invoices = () => {
-	const [isEmpty, setIsEmpty] = useState(false);
-	const invoices: string[] = [];
-
-	useEffect(() => {
-		setIsEmpty(invoices.length === 0);
-	}, [invoices]);
 
 	return (
 		<AuthLayout>
@@ -23,7 +17,7 @@ const Invoices = () => {
 				exit="exit"
 			>
 				<InvoiceHeader />
-				{isEmpty ? <span>EmptyPage invoice Component</span>: <span>InvoicesList component</span>}
+				<InvoiceList />			
 			</motion.div>
 		</AuthLayout>
 	);

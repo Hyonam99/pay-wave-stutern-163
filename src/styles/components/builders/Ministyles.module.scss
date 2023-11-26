@@ -9,7 +9,7 @@
 	place-items: center;
 	overflow: hidden;
 	border-radius: 0 0 0 1.5rem;
-    transition: transform 0.3s ease-in-out;
+	transition: transform 0.3s ease-in-out;
 }
 
 .logo-image {
@@ -36,19 +36,23 @@
 	left: 0;
 	top: -13px;
 	z-index: 60;
-	min-height:100vh;
+	min-height: 100vh;
 	width: 48%;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	padding-top: .2rem;
-	gap: 4px;
+	padding-top: 0.2rem;
+	gap: 1.7rem;
 	background: $secondary-color;
 	padding-left: 1rem !important;
-	color: $text-color;
+	color: $primary-color;
 
 	li {
 		list-style-type: none;
+
+		a {
+			color: $primary-color;
+		}
 	}
 }
 
@@ -63,6 +67,7 @@
 
 .menu-item {
 	margin-top: 2px;
+	font-weight: bold;
 }
 
 @media screen and (min-width: 768px) {
@@ -74,7 +79,58 @@
 /**STYLES FOR THE CUSTOM BUTTON */
 
 @media screen and (max-width: 214px) {
-    .custom_button {
-        font-size: .7rem !important;
-    }
+	.custom_button {
+		font-size: 0.7rem !important;
+	}
+}
+
+/**STYLES FOR THE CUSTOM SWITCH */
+
+.status {
+	width: fit-content;
+	padding: .2rem .3rem;
+	font-size: 1rem;
+	font-weight: 600;
+	line-height: 1.5rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 0.6em;
+	border: none;
+}
+
+.status::before {
+	margin-right: 0.9rem;
+	width: 0.8rem;
+	height: 0.8rem;
+	content: "";
+	border-radius: 50%;
+	display: block;
+}
+
+.status-paid {
+	color: #34d59d;
+	background: hsla(159, 65%, 59%, 0.06);
+}
+
+.status-paid::before {
+	background: #34d59d;
+}
+
+.status-pending {
+	color: #ff9000;
+	background: hsla(34, 100%, 50%, 0.06);
+}
+
+.status-pending::before {
+	background: #ff9000;
+}
+
+.status-draft {
+	color: #888eaf;
+	background: hsla(231, 73%, 93%, 0.06);
+}
+
+.status-draft::before {
+	background: #888eaf;
 }

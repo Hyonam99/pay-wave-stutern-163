@@ -4,13 +4,23 @@ import { CustomButton, InputField } from "components";
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 import style from "styles/pages/auth.module.scss";
-import { login_Schema } from "./validationSchema";
+import { login_Schema } from "../../utils/validationSchema";
 import { LoginDTO } from "interfaces/Interfaces";
 import { useNavigate } from "react-router-dom";
+import { useLogin } from "hooks/auth";
 
 const Login = () => {
 
     const navigate = useNavigate()
+	const {create, isLoading} = useLogin({
+		onSuccess(data: any) {
+			localStorage.setItem("paywave-token", data?.data?.token)
+			navigate("/dashboard")
+		},
+		onError(error) {
+			console.log(error)
+		},
+	})
 
 	const initial_Login_Values: LoginDTO = { email: "", password: "" };
 
@@ -19,8 +29,7 @@ const Login = () => {
 		validateOnBlur: true,
 		validationSchema: login_Schema,
 		onSubmit: (values: LoginDTO) => {
-			console.log(values);
-            navigate("/dashboard")
+			create(values)
 		},
 	});
 
@@ -84,8 +93,12 @@ const Login = () => {
 							Forgot Password ?
 						</Link>
 					</Box>
-					<CustomButton title="Log in" type="submit" isLoading={false} />
+					<CustomButton title="Log in" type="submit" isLoading={isLoading} />
 				</form>
+				<Box display="flex" alignItems="center" gap=".6rem">
+					<span>Don&apos;t have an account ?</span>
+					<Link to="/register">Create one</Link>
+				</Box>
 			</Box>
 		</Container>
 	);

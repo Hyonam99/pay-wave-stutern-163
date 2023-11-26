@@ -1,5 +1,7 @@
 /**DTO : Data Transfer Object, the data object structure of the payload*/
 
+import { InvoiceItemsType } from "./Types";
+
 export interface LoginDTO {
     email: string;
     password: string;
@@ -10,7 +12,7 @@ export interface SignupDTO {
     lastName: string;
     email: string;
     businessName: string;
-	businessAddress: string;
+	businessAddress?: string;
     phoneNumber: string;
     password: string;
 }
@@ -24,4 +26,22 @@ export interface CustomButtonProps {
     className?: string | ''
     type?: "button" | "reset" | "submit"
     isLoading?: boolean
+}
+
+export interface CardProps {
+    title: string
+    sub_Text: string
+    content: number
+    icon: any
+}
+
+export interface CreateInvoiceDto {
+    customerName: string
+    customerEmail: string
+    items: InvoiceItemsType[]
+}
+
+export interface CreateCustomerDto {
+    customerName: string
+    customerEmail: string
 }

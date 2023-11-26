@@ -22,7 +22,6 @@
     display: flex;
     flex-direction: column;
     min-height: 100svh;
-    font-family: var(--main-font);
 }
 
 .auth_main_content {
@@ -32,4 +31,11 @@
     padding: 1rem;
     flex-grow: 1;
     z-index: 1;
+    background: $secondary-color;
+}
+
+@media screen and (max-width: 568px) {
+    .auth_main_content {
+        padding: .8rem 0;
+    }
 }

@@ -11,3 +11,34 @@
     background-size: cover;
 }
 
+/*custom text styling for table like rows*/
+@mixin table-bar-text {
+    font-size: 1rem;
+	line-height: .8rem;
+	font-weight: normal;
+}
+
+/*custom background styling for the main sections in the auth layout: for large screens*/
+@mixin main-content-bg {
+    background: white;
+    padding: 0 2rem 2rem 2rem;
+    border-radius: .8rem;
+}
+
+@mixin main-content-bg-lg {
+    width: 80%;
+    margin-left: 5rem;
+    margin-top: 2.2rem;
+    background: white;
+    padding: 0 2rem 2rem 2rem;
+    border-radius: .8rem;
+}
+
+/*custom background styling for the main sections in the auth layout: for small screens*/
+@mixin main-content-bg-sm {
+    width: 90%;
+    margin-top: 4.6rem;
+    background: white;
+    padding: 0 .4rem 2rem .4rem;
+    border-radius: .8rem;
+}

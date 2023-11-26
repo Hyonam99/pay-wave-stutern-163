@@ -1,11 +1,10 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Link } from "react-router-dom";
-import {Logo, Hamburger} from "components";
+import { Logo, Hamburger, CustomButton } from "components";
+import { AuthContext } from "providers/AuthProvider";
 import style from "styles/components/main/NavBar.module.scss";
-import { Button } from "@mui/material";
 
 const Navbar = () => {
-	const isLoggedIn = false;
 
 	return (
 		<nav className={style.navbar}>
@@ -14,11 +13,13 @@ const Navbar = () => {
 			</Link>
 			<div className={style.toggle_Icon}></div>
 			<div>
-				<div className={!isLoggedIn ? style["mobile-hamburger"] : style["hidden"]}>
+				<div
+					className={style["mobile-hamburger"]}
+				>
 					<Hamburger />
 				</div>
 				<div
-					className={isLoggedIn ? style["hidden"] : style["desktop-nav-links"]}
+					className={style["desktop-nav-links"]}
 				>
 					<NavLinks />
 				</div>
@@ -30,27 +31,19 @@ const Navbar = () => {
 export default Navbar;
 
 export const NavLinks = () => {
-//   const { auth } = useAuth();
-//   const { isLoggedIn } = auth;
-  const isLoggedIn = false;
+	const {token} = useContext(AuthContext)
 
-  return (
-    <div style={{display: "flex", gap: "8px", alignItems: "center"}}>
-      <Button
-        // to={isLoggedIn ? 'dashboard' : 'login'}
-        // intent={isLoggedIn ? 'outlined-link' : 'primary-link'}
-        // size="fixed"
-      >
-        {isLoggedIn ? 'Dashboard' : 'Log In'}
-      </Button>
+	return (
+		<div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+			<Link to={token ? "/dashboard" : "/login"}>
+				<CustomButton title={token ? "Dashboard" : "Log In"} />
+			</Link>
 
-      {isLoggedIn ? (
-        <Button />
-      ) : (
-        <Button>
-          Register
-        </Button>
-      )}
-    </div>
-  );
+			{!token && (
+				<Link to="/register">
+					<CustomButton title="Register" outlined={true}/>
+				</Link>
+			)}
+		</div>
+	);
 };

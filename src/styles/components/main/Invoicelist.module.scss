@@ -1,0 +1,81 @@
+@import "../../base-style";
+
+.invoice-container {
+	padding: .4rem;
+	border-bottom: 1px solid rgba(158, 152, 152, 0.945);
+	transition: transform 0.2s ease;
+	cursor: pointer;
+	margin-top: .4rem;
+}
+
+.invoice-container:hover,
+.invoice-container:focus {
+	border: $primary-color;
+	transform: scale(1.02);
+	padding: .4rem;
+}
+
+.desktop-version {
+	display: none;
+}
+
+.about {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: .8rem;
+}
+
+.id,
+.amount,
+.receiver,
+.date {
+	@include table-bar-text();
+    color: $text-color;
+}
+
+.id span {
+	color: $icon-color;
+}
+
+.information {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+
+@media screen and (min-width: 750px) {
+
+	.invoice-container:hover,
+	.invoice-container:focus {
+		border: 1px solid $primary-color;
+		border-radius: 1em;
+		padding: .4rem;
+	}
+
+    .amount {
+		margin: 0;
+	}
+
+	.mobile-version {
+		display: none;
+	}
+
+	.desktop-version {
+		display: grid;
+		grid-template-columns: 11% 12% 40% 12% 14% 10%;
+		align-items: center;
+		text-align: center;
+        padding: 0 .6rem;
+
+		.id,
+		.amount {
+			text-align: left;
+		}
+	}
+
+	.desktop-version img {
+		margin-left: 2rem;
+	}
+}

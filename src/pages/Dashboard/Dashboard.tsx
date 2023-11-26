@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import AuthLayout from "layouts/AuthLayout";
-import { DashboardHeader } from "components";
+import { DashboardHeader, EmptyContent } from "components";
 import style from "styles/components/main/Dashboardheader.module.scss"
+import { useGetBusinessData } from "hooks/auth";
 
 const Dashboard = () => {
-	const [isEmpty, setIsEmpty] = useState(false);
-	const invoices: string[] = [];
-
-	useEffect(() => {
-		setIsEmpty(invoices.length === 0);
-	}, [invoices]);
+	const {data, isError, isLoading, isSuccess} = useGetBusinessData()
+	console.log({data, isError, isLoading, isSuccess})
 
 	return (
 		<AuthLayout>
@@ -23,7 +20,7 @@ const Dashboard = () => {
 				exit="exit"
 			>
 				<DashboardHeader />
-				{isEmpty ? <span>EmptyPage dashboard Component</span>: <span>Dashboard component</span>}
+				<EmptyContent />
 			</motion.div>
 		</AuthLayout>
 	);

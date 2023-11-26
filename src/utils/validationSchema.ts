@@ -12,9 +12,13 @@ const signup_Schema = Yup.object({
     lastName: Yup.string().required('last name is required'),
     email: Yup.string().email('Invalid email address').required('email is required'),
     businessName: Yup.string().required('business name is required'),
-    businessAddress: Yup.string().required('business address is required'),
     phoneNumber: Yup.string().matches(isNumberValid, 'invalid phone number').required('phone number is required'),
     password: Yup.string().required('password is required'),
 })
 
-export {login_Schema, signup_Schema}
+const invoice_Schema = Yup.object({
+    customerName: Yup.string().required('first name is required'),
+    customerEmail: Yup.string().email('Invalid email address').required('email is required'),
+})
+
+export {login_Schema, signup_Schema, invoice_Schema}

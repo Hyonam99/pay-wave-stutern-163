@@ -60,12 +60,12 @@ const Footer = () => {
                 <p> <MdLocationPin size={20}/> Stutern-163, Ikeja, Lagos</p>
                 <div className={style["footer_media"]}>
                     <span className={style["footer_social-media_icons"]}>
-                        <Link to="https://twitter.com/Fx_Factor?t=nFu0rZmr2YhaQVRTT5tz8Q&s=09" target="_blank">
+                        <Link to="https://twitter.com/" target="_blank">
                             <RiTwitterXFill />
                         </Link>
                     </span>
                     <span className={style["footer_social-media_icons"]}>
-                        <Link to="https://www.facebook.com/profile.php?id=61552635560767&mibextid=ZbWKwL" target="_blank">
+                        <Link to="https://www.facebook.com/" target="_blank">
                             <FaFacebook />
                         </Link>
                     </span>

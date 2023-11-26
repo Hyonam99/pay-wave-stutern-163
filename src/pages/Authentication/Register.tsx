@@ -3,20 +3,29 @@ import { Container, Box } from "@mui/material";
 import { CustomButton, InputField } from "components";
 import { useFormik } from "formik";
 import style from "styles/pages/auth.module.scss";
-import { signup_Schema } from "./validationSchema";
+import { signup_Schema } from "../../utils/validationSchema";
 import { SignupDTO } from "interfaces/Interfaces";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import {useSignup} from "hooks/auth";
 
 const Register = () => {
 
 	const navigate = useNavigate()
+	const {create, isLoading} = useSignup({
+		onSuccess(data: any) {
+			console.log(data)
+			navigate("/login")
+		},
+		onError(error) {
+			console.log(error)
+		},
+	})
 
 	const initial_Signup_Values: SignupDTO = {
 		firstName: "",
 		lastName: "",
 		email: "",
 		businessName: "",
-		businessAddress: "",
 		phoneNumber: "",
 		password: "",
 	};
@@ -26,8 +35,7 @@ const Register = () => {
 		validateOnBlur: true,
 		validationSchema: signup_Schema,
 		onSubmit: (values: SignupDTO) => {
-			console.log(values);
-			navigate("/dashboard")
+			create(values)
 		},
 	});
 
@@ -115,22 +123,6 @@ const Register = () => {
 						/>
 
 						<InputField
-							id="businessAddress"
-							type="text"
-							label="Business address"
-							variant="filled"
-							size="small"
-							margin="none"
-							placeholder="enter business address"
-							error={errors.businessAddress !== undefined && touched.businessAddress === true}
-							helperText={
-								errors.businessAddress !== undefined && touched.businessAddress === true
-									? errors.businessAddress : ""
-							}
-							{...getFieldProps("businessAddress")}
-						/>
-
-						<InputField
 							id="phoneNumber"
 							type="text"
 							label="Phone number"
@@ -163,8 +155,12 @@ const Register = () => {
 						/>
 
 					</Box>
-					<CustomButton title="Create" type="submit" isLoading={false} />
+					<CustomButton title="Create" type="submit" isLoading={isLoading} />
 				</form>
+				<Box display="flex" alignItems="center" gap=".6rem">
+						<span>already have an account ?</span>
+						<Link to="/login">Log In</Link>
+				</Box>
 			</Box>
 		</Container>
 	);

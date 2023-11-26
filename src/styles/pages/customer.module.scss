@@ -1,14 +1,12 @@
 @import "../base-style";
 
 .customer_page {
-    width: 100%;
-    margin-top: 4rem;
+    @include main-content-bg-sm();
 }
 
 /**MEDIA QUERY FOR THE INVOICE PAGE*/
 @media screen and (min-width: 1000px) {
     .customer_page { 
-        width: 80%;
-        margin-left: 5rem;
+        @include main-content-bg-lg();
     }
 }
