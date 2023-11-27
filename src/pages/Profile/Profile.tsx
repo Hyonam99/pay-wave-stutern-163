@@ -62,6 +62,7 @@ const Profile = () => {
 	const formik = useFormik<BusinessInfoType>({
 		initialValues: initial_Customer_Values,
 		validateOnBlur: true,
+		enableReinitialize: true,
 		onSubmit: (values) => {
 			updateBusinessInfo(values);
 		},
