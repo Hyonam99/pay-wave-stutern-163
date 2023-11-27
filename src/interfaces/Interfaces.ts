@@ -10,6 +10,7 @@ export interface LoginDTO {
 export interface SignupDTO {
     firstName: string;
     lastName: string;
+    userName: string
     email: string;
     businessName: string;
 	businessAddress?: string;

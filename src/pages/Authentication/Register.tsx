@@ -23,6 +23,7 @@ const Register = () => {
 
 	const initial_Signup_Values: SignupDTO = {
 		firstName: "",
+		userName: "",
 		lastName: "",
 		email: "",
 		businessName: "",
@@ -57,7 +58,6 @@ const Register = () => {
 
 				<form onSubmit={handleSubmit} className={style["registration-form"]}>
 					<Box className={style["registration-form_wrapper_inputs"]}>
-
 						<InputField
 							id="firstName"
 							type="text"
