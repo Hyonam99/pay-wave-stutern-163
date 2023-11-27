@@ -3,7 +3,9 @@ import { EmptyContent } from "components";
 
 const InvoiceDetail = () => {
   return (
-    <div><EmptyContent /></div>
+    <>
+      <EmptyContent />
+    </>
   )
 }
 

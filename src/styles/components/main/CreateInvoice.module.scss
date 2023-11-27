@@ -6,7 +6,7 @@
 	align-items: center;
 	gap: 1.4rem;
     padding: 1.2rem 0;
-	.test-input {
+	.text-input {
 		background: white;
 		width: 90%;
 	}
@@ -20,15 +20,67 @@
     width: 90%;
 
     .item {
-        width: 90%;
+        width: 100%;
         margin-right: 8px;
         margin-bottom: 8px;
     }
 
     .item-wrapper-account {
+        display: flex;
 
-        .item-digit {
+        .item-digit,
+        .item-name {
             margin-right: 8px;
+            margin-bottom: 8px;
+        }
+    }
+}
+
+@media screen and (max-width: 834px) {
+
+    .item-wrapper {
+        width: 90%;
+        
+        .item-wrapper-account {
+
+            .item-name {
+                width: 76%;
+            }
+    
+            .item-digit {
+                width: 24%;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 584px) {
+
+    .item-wrapper {
+        
+        .item-wrapper-account {
+            flex-direction: column;
+
+            .item-name {
+                width: 100%;
+            }
+    
+            .item-digit {
+                width: 46%;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 348px) {
+
+    .item-wrapper {
+        
+        .item-wrapper-account {
+    
+            .item-digit {
+                width: 100%;
+            }
         }
     }
 }

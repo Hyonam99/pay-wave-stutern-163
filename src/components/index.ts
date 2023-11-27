@@ -15,6 +15,8 @@ import InvoiceList from "./main/InvoiceList";
 import InvoiceBar from "./builders/InvoiceBar";
 import Status from "./builders/Status"
 import CreateInvoice from "./main/CreateInvoice";
+import CustomerList from "./main/CustomerList"
+import CustomerBar from "./builders/CustomerBar"
 
 export {
 	CustomButton,
@@ -33,5 +35,7 @@ export {
 	InvoiceBar,
 	InvoiceList,
 	Status,
-	CreateInvoice
+	CreateInvoice,
+	CustomerList,
+	CustomerBar
 };

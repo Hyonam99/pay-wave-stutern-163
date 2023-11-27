@@ -5,7 +5,7 @@
     @include main-content-bg-sm();
 }
 
-/**STYLES FOR THE INVOICE HEADER BEGIND HERE*/
+/**STYLES FOR THE INVOICE HEADER BEGINS HERE*/
 .container {
 	display: flex;
 	justify-content: space-between;
@@ -15,7 +15,7 @@
 .title {
 	font-size: clamp(1.6rem, 2vw, 2.1rem);
 	font-weight: bold;
-	color: var(--color-white);
+	color: $text-grey;
 	margin-bottom: 0.5rem;
 }
 
@@ -43,7 +43,7 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-		gap: .3rem;
+		gap: .5rem;
         align-items: flex-start;
     }
 }

@@ -19,7 +19,7 @@ export const queryClient = new QueryClient({
 	queryCache: new QueryCache({
 		onError: (error, query) => {
 			if (query.state.data !== undefined && isAxiosError(error)) {
-				throw new Error(`Something went wrong: ${error.message}`);
+				console.error(`Something went wrong: ${error.message}`);
 			}
 		},
 	}),

@@ -15,6 +15,17 @@ export const random_Invoices = () => {
     })
 }
 
+export const random_Customers = () => {
+    return Array.from({ length: 4 }, () => {
+        return {
+            id: faker.number.int(9),
+            client: faker.person.fullName(),
+            email: faker.internet.email(),
+            creationDate: "22/11/2023"
+        }
+    })
+}
+
 export const random_Transactions =[
     {
         title: "Balance",

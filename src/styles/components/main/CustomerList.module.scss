@@ -1,6 +1,6 @@
 @import "../../base-style";
 
-.invoice-container {
+.customer-container {
 	padding: .4rem;
 	border-bottom: 1px solid rgba(158, 152, 152, 0.945);
 	transition: transform 0.2s ease;
@@ -8,9 +8,10 @@
 	margin-top: .4rem;
 }
 
-.invoice-container:hover,
-.invoice-container:focus {
+.customer-container:hover,
+.customer-container:focus {
 	border: $primary-color;
+	transform: scale(1.02);
 	padding: .4rem;
 }
 
@@ -21,9 +22,8 @@
 .about {
 	display: flex;
 	align-items: center;
-	flex-wrap: wrap;
 	justify-content: space-between;
-	margin-bottom: .3rem;
+	margin-bottom: .8rem;
 }
 
 .id,
@@ -41,15 +41,14 @@
 .information {
 	display: flex;
 	align-items: center;
-	flex-wrap: wrap;
 	justify-content: space-between;
 }
 
 
-@media screen and (min-width: 750px) {
+@media screen and (min-width: 768px) {
 
-	.invoice-container:hover,
-	.invoice-container:focus {
+	.customer-container:hover,
+	.customer-container:focus {
 		border: 1px solid $primary-color;
 		border-radius: 1em;
 		padding: .4rem;
@@ -65,7 +64,7 @@
 
 	.desktop-version {
 		display: grid;
-		grid-template-columns: 5% 28% 28% 18% 13% 7%;
+		grid-template-columns: 35% 35% 24% 5%;
 		align-items: center;
 		text-align: center;
         padding: 0 .6rem;
@@ -74,9 +73,5 @@
 		.amount {
 			text-align: left;
 		}
-	}
-
-	.desktop-version img {
-		margin-left: 2rem;
 	}
 }

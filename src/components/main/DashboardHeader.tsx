@@ -1,13 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { DashboardCard } from "components";
 import { Box } from "@mui/material";
 import style from "styles/components/main/Dashboardheader.module.scss";
 import { random_Transactions } from "assets/mocked-data/constants";
 import { GiSunCloud, GiMoon } from "react-icons/gi";
 import { RiSunFoggyFill } from "react-icons/ri";
+import { useGetBusinessData } from "hooks/business";
+import { AuthContext } from "providers/AuthProvider";
+import { BusinessInfoType } from "interfaces/Types";
 
 const DashboardHeader = () => {
+	const {token} = useContext(AuthContext)
+	const {data} = useGetBusinessData(token as string)
 	const [timeOfDay, setTimeOfDay] = useState({ time: "", icon: GiSunCloud });
+
 	useEffect(() => {
 		function getTimeOfDay() {
 			const currentTime = new Date().getHours();
@@ -32,13 +38,15 @@ const DashboardHeader = () => {
 
 		const { greetingTime, icon } = getTimeOfDay();
 		setTimeOfDay({ time: greetingTime, icon: icon });
+
 	}, []);
 	return (
+
 		<section className={style["container"]}>
 			<span className={style["cards-greetings"]}>
 				Good {timeOfDay.time} {<timeOfDay.icon size={16} />}
 			</span>
-			<h3>Dashboard</h3>
+			<h3>{(data as BusinessInfoType)?.businessName ?? ""}</h3>
 			<Box className={style["container_wrapper"]}>
 				{random_Transactions?.slice(0, 4).map((item, i) => (
 					<DashboardCard

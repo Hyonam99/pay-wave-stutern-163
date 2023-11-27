@@ -1,8 +1,9 @@
 import React from "react";
 import { CreateInvoice, CustomFilter } from "components";
-import { Button } from "@mui/material";
+import { Button, Box } from "@mui/material";
 import { FaPlus } from "react-icons/fa6";
 import Dialog from "@mui/material/Dialog";
+import { MdOutlineCancel } from "react-icons/md";
 import style from "styles/components/main/InvoiceHeader.module.scss";
 
 const InvoiceHeader = () => {
@@ -46,7 +47,17 @@ const InvoiceHeader = () => {
 				fullWidth={true}
 				maxWidth={"md"}
 			>
-				<CreateInvoice />
+				<Box
+					display="flex"
+					alignItems="center"
+					justifyContent="flex-end"
+					width="100%"
+				>
+					<Button onClick={() => handleClose()}>
+						<MdOutlineCancel size={28} color="grey" />
+					</Button>
+				</Box>
+				<CreateInvoice onClose={() => handleClose()}/>
 			</Dialog>
 		</section>
 	);

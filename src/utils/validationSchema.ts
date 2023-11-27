@@ -16,9 +16,22 @@ const signup_Schema = Yup.object({
     password: Yup.string().required('password is required'),
 })
 
-const invoice_Schema = Yup.object({
+const invoice_Schema = Yup.object().shape({
+    items: Yup.array()
+      .of(
+        Yup.object().shape({
+          name: Yup.string().required('Required'),
+          description: Yup.string().required('Required'),
+          price: Yup.number().min(1, "less tan zero").required('Required'),
+          quantity: Yup.number().required('Required'),
+        })
+      )
+      .required('item is required')
+  });
+
+const customer_Schema = Yup.object({
     customerName: Yup.string().required('first name is required'),
     customerEmail: Yup.string().email('Invalid email address').required('email is required'),
 })
 
-export {login_Schema, signup_Schema, invoice_Schema}
+export {login_Schema, signup_Schema, invoice_Schema, customer_Schema}

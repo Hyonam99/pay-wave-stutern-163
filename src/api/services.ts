@@ -1,7 +1,8 @@
+import { InvoiceItemsType } from 'interfaces/Types';
 import pay_Wave_Instance from '.';
 import { CreateCustomerDto, LoginDTO, SignupDTO } from 'interfaces/Interfaces';
 
-const { post } = pay_Wave_Instance;
+const { post, get } = pay_Wave_Instance;
 
 export const signupBusiness = async (payload: SignupDTO) => {
     const response = post(`/auth/register`, payload)
@@ -17,17 +18,37 @@ export const logoutBusiness = async () => {
     localStorage.removeItem('paywave-token')
 }
 
-export const getBusinessData = async () => {
-    const response = post(`/business-info`)
+export const getBusinessData = async (token: string) => {
+    const response = get(`/business-info`, { headers: { Authorization: `Bearer ${token}` } })
     return (await response).data
 }
 
-export const createInvoice = async (payload: any) => {
-    const response = post(`/auth/login`, payload)
+export const createInvoice = async (payload: InvoiceItemsType[], customerId: number, token: string) => {
+    const response = post(`create-invoice/${customerId}`, {items:payload}, { headers: { Authorization: `Bearer ${token}` } })
     return (await response).data
 }
 
 export const createCustomer = async (payload: CreateCustomerDto, token: string) => {
     const response = post(`/create-customer`, payload, { headers: { Authorization: `Bearer ${token}` } })
+    return (await response).data
+}
+
+export const getAllCustomers = async (token: string) => {
+    const response = get(`/allCustomers`, { headers: { Authorization: `Bearer ${token}` } })
+    return (await response).data
+}
+
+export const getCustomer = async (payload: string, token: string) => {
+    const response = get(`/customer`, {params: {customerEmail: payload}, headers: { Authorization: `Bearer ${token}` } })
+    return (await response).data
+}
+
+export const getAllInvoices = async (token: string) => {
+    const response = get(`/all-invoices`, { headers: { Authorization: `Bearer ${token}` } })
+    return (await response).data
+}
+
+export const getInvoice = async (invoiceId: number, token: string) => {
+    const response = get(`/invoice/${invoiceId}`, { headers: { Authorization: `Bearer ${token}` } })
     return (await response).data
 }

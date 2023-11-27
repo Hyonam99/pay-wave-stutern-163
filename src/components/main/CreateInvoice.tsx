@@ -1,15 +1,59 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { CustomButton, InputField } from "components";
 import { useFormik } from "formik";
-import style from "styles/components/main/CreateInvoice.module.scss";
 import { CreateInvoiceDto } from "interfaces/Interfaces";
 import { invoice_Schema } from "utils/validationSchema";
-import { Checkbox, Box, Button } from "@mui/material";
+import { Box, Button, TextField, Alert, AlertColor } from "@mui/material";
+import { MdOutlineCancel } from "react-icons/md";
+import Autocomplete from "@mui/material/Autocomplete";
+import { AuthContext } from "providers/AuthProvider";
+import { useCreateInvoice, useGetAllCustomers } from "hooks/customer";
+import { CustomerInfoType, serviceResponse } from "interfaces/Types";
+import style from "styles/components/main/CreateInvoice.module.scss";
 
-const CreateInvoice = () => {
+const CreateInvoice = ({onClose} : {onClose: () => void}) => {
+	const { token } = useContext(AuthContext);
+	const { data } = useGetAllCustomers(token as string);
+	const [userId, setUserId] = useState(0);
+
+	const [apiAlert, setApiAlert] = useState({
+		open: false,
+		intent: "",
+		message: "",
+	});
+
+	const reset_Api_Alert = () => {
+		setTimeout(() => {
+			setApiAlert({ open: false, intent: "", message: "" });
+		}, 4000);
+	};
+
+	const { createInvoice, isLoading } = useCreateInvoice(
+		{
+			onSuccess: (data: serviceResponse) => {
+				setApiAlert({
+					open: data.success,
+					intent: "success",
+					message: data.message,
+				});
+				reset_Api_Alert();
+				window.location.reload();
+				onClose()
+			},
+			onError: (error: any) => {
+				setApiAlert({
+					open: true,
+					intent: "error",
+					message: error?.response?.data?.error,
+				});
+				reset_Api_Alert();
+			},
+		},
+		userId,
+		token as string
+	);
+
 	const initial_Invoice_Values: CreateInvoiceDto = {
-		customerName: "",
-		customerEmail: "",
 		items: [{ name: "", description: "", price: 0, quantity: 0 }],
 	};
 
@@ -18,15 +62,9 @@ const CreateInvoice = () => {
 		validateOnBlur: true,
 		validationSchema: invoice_Schema,
 		onSubmit: (values) => {
-			console.log(values);
+			createInvoice(values.items);
 		},
 	});
-
-	const [checked, setChecked] = React.useState(false);
-
-	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setChecked(event.target.checked);
-	};
 
 	const {
 		handleSubmit,
@@ -53,83 +91,103 @@ const CreateInvoice = () => {
 		formik.setFieldValue("items", updatedItems);
 	};
 
+	const autoComplete_Options =
+		data?.map((customer_Info: CustomerInfoType) => {
+			return { label: customer_Info.name, id: customer_Info.id };
+		}) ?? [];
+
+	const [value, setValue] = useState<string | null>("");
+	const [inputValue, setInputValue] = useState("");
+
 	return (
 		<>
+			{apiAlert.open && (
+				<Alert severity={apiAlert.intent as AlertColor}>
+					{apiAlert.message}
+				</Alert>
+			)}
 			<form
 				onSubmit={handleSubmit}
 				autoComplete="off"
 				className={style["form"]}
 			>
-				<InputField
-					id="customerName"
-					type="text"
-					label="Customer name"
-					variant="filled"
-					size="small"
-					margin="none"
-					placeholder="enter customer name"
-					error={
-						errors.customerName !== undefined && touched.customerName === true
-					}
-					helperText={
-						errors.customerName !== undefined && touched.customerName === true
-							? errors.customerName
-							: ""
-					}
-					{...getFieldProps("customerName")}
-					className={style["test-input"]}
-				/>
-				<InputField
-					id="email"
-					label="Customer Email"
-					type="email"
-					variant="filled"
-					size="small"
-					margin="none"
-					placeholder="enter customer email"
-					error={
-						errors.customerEmail !== undefined && touched.customerEmail === true
-					}
-					helperText={
-						errors.customerEmail !== undefined && touched.customerEmail === true
-							? errors.customerEmail
-							: ""
-					}
-					{...getFieldProps("customerEmail")}
-					className={style["test-input"]}
-				/>
-				<Box
-					style={{
-						display: "flex",
-						alignItems: "center",
-						justifyItems: "flex-start",
-						width: "90%",
+				<Autocomplete
+					value={value}
+					onChange={(e: any, newValue: any) => {
+						setValue(newValue);
+						setUserId(newValue.id);
 					}}
-				>
-					<Checkbox
-						checked={checked}
-						onChange={handleChange}
-						inputProps={{ "aria-label": "controlled" }}
-					/>
-					Save as customer
-				</Box>
+					inputValue={inputValue}
+					onInputChange={(e, newInputValue) => {
+						setInputValue(newInputValue);
+					}}
+					id="auto-compelete"
+					options={autoComplete_Options}
+					sx={{ width: 300 }}
+					renderInput={(params) => (
+						<TextField {...params} label="select customer..." />
+					)}
+					className={style["text-input"]}
+				/>
 				{formik.values.items.map((item, i) => (
 					<div key={i + 1} className={style["item-wrapper"]}>
-						<InputField
-							id="item"
-							label="name"
-							type="text"
-							variant="filled"
-							size="small"
-							margin="none"
-							placeholder="enter item name"
-							error={
-								errors.items?.[i] !== undefined &&
-								touched.items?.[i].name
-							}
-							{...getFieldProps(`items.${i}.name`)}
-							className={style["item"]}
-						/>
+						<Box
+							display="flex"
+							alignItems="center"
+							justifyContent="flex-end"
+							width="100%"
+						>
+							<Button onClick={() => handleRemove(i)}>
+								<MdOutlineCancel size={18} color="red" />
+							</Button>
+						</Box>
+						<Box className={style["item-wrapper-account"]}>
+							<InputField
+								id="item"
+								label="name"
+								type="text"
+								variant="filled"
+								size="small"
+								margin="none"
+								placeholder="enter item name"
+								error={
+									errors.items?.[i] !== undefined && touched.items?.[i]?.name
+								}
+								{...getFieldProps(`items.${i}.name`)}
+								className={style["item-name"]}
+							/>
+							<Box>
+								<InputField
+									id="item"
+									label="price"
+									type="number"
+									variant="filled"
+									size="small"
+									margin="none"
+									placeholder="price"
+									error={
+										errors.items?.[i] !== undefined && touched.items?.[i]?.price
+									}
+									{...getFieldProps(`items.${i}.price`)}
+									className={style["item-digit"]}
+								/>
+								<InputField
+									id="item"
+									label="quantity"
+									type="number"
+									variant="filled"
+									size="small"
+									margin="none"
+									placeholder="enter quantity"
+									error={
+										errors.items?.[i] !== undefined &&
+										touched.items?.[i]?.quantity
+									}
+									{...getFieldProps(`items.${i}.quantity`)}
+									className={style["item-digit"]}
+								/>
+							</Box>
+						</Box>
 						<InputField
 							id="item"
 							label="description"
@@ -140,44 +198,11 @@ const CreateInvoice = () => {
 							placeholder="enter item description"
 							error={
 								errors.items?.[i] !== undefined &&
-								touched.items?.[i].description
+								touched.items?.[i]?.description
 							}
 							{...getFieldProps(`items.${i}.description`)}
 							className={style["item"]}
 						/>
-						<Box className={style["item-wrapper-account"]}>
-							<InputField
-								id="item"
-								label="price"
-								type="text"
-								variant="filled"
-								size="small"
-								margin="none"
-								placeholder="price"
-								error={
-									errors.items?.[i] !== undefined &&
-									touched.items?.[i].price
-								}
-								{...getFieldProps(`items.${i}.price`)}
-								className={style["item-digit"]}
-							/>
-							<InputField
-								id="item"
-								label="quantity"
-								type="text"
-								variant="filled"
-								size="small"
-								margin="none"
-								placeholder="enter quantity"
-								error={
-									errors.items?.[i] !== undefined &&
-									touched.items?.[i].description
-								}
-								{...getFieldProps(`items.${i}.quantity`)}
-								className={style["item-digit"]}
-							/>
-							<Button onClick={() => handleRemove(i)}>-</Button>
-						</Box>
 					</div>
 				))}
 				<CustomButton
@@ -187,7 +212,7 @@ const CreateInvoice = () => {
 					onClick={() => handleInsert()}
 					outlined
 				/>
-				<CustomButton title="Create" type="submit" isLoading={false} />
+				<CustomButton title="Create" type="submit" isLoading={isLoading} />
 			</form>
 		</>
 	);

@@ -36,8 +36,6 @@ export interface CardProps {
 }
 
 export interface CreateInvoiceDto {
-    customerName: string
-    customerEmail: string
     items: InvoiceItemsType[]
 }
 
@@ -45,3 +43,4 @@ export interface CreateCustomerDto {
     customerName: string
     customerEmail: string
 }
+
