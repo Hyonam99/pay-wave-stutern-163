@@ -44,6 +44,27 @@
 	}
 }
 
+.dashboard-table-container {
+	table {
+		thead {
+			tr {
+				th {
+					text-align: left !important;
+				}
+			}
+		}
+		tbody {
+			tr {
+				td {
+					margin-right: 14px !important;
+					min-width: 4.6rem !important;
+					text-align: left !important;
+				}
+			}
+		}
+	}
+}
+
 /**MEDIA QUERY FOR THE DASHBOARD PAGE*/
 @media screen and (min-width: 1000px) {
 	.dashboard_page {

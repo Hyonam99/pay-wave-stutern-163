@@ -21,12 +21,11 @@ const CustomerBar = (props: CustomerProps) => {
 					<h2 className={style["id"]}>
 						{email}
 					</h2>
-					<span className={style["receiver"]}>{client}</span>
-					<span><HiDotsVertical /></span>
+					<span><HiDotsVertical color="#00a4d6"/></span>
 				</div>
 				<div className={style["information"]}>
 					<div>
-						<span className={style["date"]}>{convertTimestamp(creationDate)}</span>
+						<span className={style["receiver"]}>{client}</span>
 					</div>
 				</div>
 			</div>
@@ -36,7 +35,7 @@ const CustomerBar = (props: CustomerProps) => {
 					</h2>
 					<span className={style["receiver"]}>{client}</span>
 					<span className={style["date"]}>{convertTimestamp(creationDate)}</span>
-				<span><HiDotsVertical /></span>
+				<span><HiDotsVertical color="#00a4d6"/></span>
 			</div>
 		</div>
 	);

@@ -31,6 +31,38 @@
 	align-items: center;
 }
 
+.invoice-detail-card {
+	.invoice-main-info {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		padding: 1rem 0;
+
+		.main-client-info,
+		.invoice-dates {
+			display: flex;
+			flex-direction: column;
+			gap: .6rem;
+			align-items: flex-start;
+		}
+
+		.main-client-info {
+			.sub-info {
+				display: flex;
+				align-items: center;
+				flex-wrap: wrap;
+				gap: .5rem;
+			}
+		}
+		.invoice-dates {
+			.date-sub-info {
+				display: flex;
+				align-items: center;
+				flex-wrap: wrap;
+				gap: .5rem;
+			}
+		}
+	}
+}
 /**MEDIA QUERY FOR THE INVOICE PAGE*/
 @media screen and (min-width: 1000px) {
     .invoice_page { 
@@ -46,4 +78,38 @@
 		gap: .5rem;
         align-items: flex-start;
     }
+
+	.invoice-detail-card {
+		.invoice-main-info {
+			display: grid;
+			grid-template-columns: 1fr;
+			gap: .6rem;
+			padding: 1rem 0;
+	
+			.main-client-info,
+			.invoice-dates {
+				display: flex;
+				flex-direction: column;
+				gap: .6rem;
+				align-items: flex-start;
+			}
+	
+			.main-client-info {
+				.sub-info {
+					display: flex;
+					align-items: center;
+					flex-wrap: wrap;
+					gap: .5rem;
+				}
+			}
+			.invoice-dates {
+				.date-sub-info {
+					display: flex;
+					align-items: center;
+					flex-wrap: wrap;
+					gap: .5rem;
+				}
+			}
+		}
+	}
 }

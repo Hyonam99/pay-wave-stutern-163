@@ -31,7 +31,7 @@ export interface CustomButtonProps {
 export interface CardProps {
     title: string
     sub_Text: string
-    content: number
+    content: string
     icon: any
 }
 
@@ -44,3 +44,7 @@ export interface CreateCustomerDto {
     customerEmail: string
 }
 
+export interface GenerateLinkDto {
+    payerEmail: string
+    amount: number
+}

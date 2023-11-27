@@ -18,12 +18,12 @@ const InvoiceBar = (props: InvoiceDetailsType) => {
 							<span>#</span>
 							{id}
 						</h2>
-						<span className={style["receiver"]}>Due: {convertTimestamp(paymentDueDate as string)}</span>
-						<span><FaRegEye /></span>
+						<span className={style["date"]}>Issued: {convertTimestamp(createdAt as string)}</span>
+						<span><FaRegEye color="#00a4d6"/></span>
 					</div>
 					<div className={style["information"]}>
-							<span className={style["date"]}>Issued: {convertTimestamp(createdAt as string)}</span>
-							<h3 className={style["amount"]}>₦ {formatCurrency(parseInt(totalAmount as string))}</h3>
+							<span className={`${style["receiver"]} ${style["info-item"]}`}>Due: {convertTimestamp(paymentDueDate as string)}</span>
+							<h3 className={`${style["amount"]} ${style["info-item"]}`}>₦ {formatCurrency(parseInt(totalAmount as string))}</h3>
 							<Status status={paymentStatus?.toLowerCase() as string} />
 					</div>
 				</div>
@@ -36,7 +36,7 @@ const InvoiceBar = (props: InvoiceDetailsType) => {
 						<span className={style["receiver"]}>Due: {convertTimestamp(paymentDueDate as string)}</span>
 						<h3 className={style["amount"]}>₦ {formatCurrency(parseInt(totalAmount as string))}</h3>
                     <span><Status status={paymentStatus?.toLowerCase() as string} /></span>
-					<span><FaRegEye /></span>
+					<span><FaRegEye color="#00a4d6"/></span>
 				</div>
 			</div>
 		</Link>

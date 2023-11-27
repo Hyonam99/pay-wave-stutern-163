@@ -5,7 +5,6 @@ import Register from "./Authentication/Register";
 import InvoiceDetail from "./Invoices/Invoice-detail/InvoiceDetail";
 import Invoices from "./Invoices/Invoices";
 import Customer from "./Customers/Customer";
-import CustomerDetail from "./Customers/Customer-detail/CustomerDetail";
 import Profile from "./Profile/Profile";
 
 export {
@@ -16,6 +15,5 @@ export {
 	InvoiceDetail,
 	Invoices,
 	Customer,
-	CustomerDetail,
 	Profile,
 };

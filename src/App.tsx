@@ -6,7 +6,6 @@ import {
 	Login,
 	Register,
 	Customer,
-	CustomerDetail,
 	Invoices,
 	InvoiceDetail,
 	Profile,
@@ -22,7 +21,6 @@ function App() {
 			<Route path="/invoices" element={<Invoices />} />
 			<Route path="/invoice/:id" element={<InvoiceDetail />} />
 			<Route path="/customers" element={<Customer />} />
-			<Route path="/customer/:id" element={<CustomerDetail />} />
 			<Route path="/profile" element={<Profile />} />
 		</Routes>
 	);
