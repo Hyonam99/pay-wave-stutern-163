@@ -9,8 +9,8 @@ export const pageVariants = {
 		x: 0,
 		transition: {
 			type: "spring",
-			mass: 3.5,
-			damping: 30,
+			mass: .5,
+			damping: 32,
 			delay: 0.4,
 		},
 	},

@@ -62,7 +62,12 @@ const CreateInvoice = ({onClose} : {onClose: () => void}) => {
 		validateOnBlur: true,
 		validationSchema: invoice_Schema,
 		onSubmit: (values) => {
-			createInvoice(values.items);
+			const updatedItems = values.items.map((item) => {return {
+				...item,
+				price: item.price * 100
+			}})
+			createInvoice(updatedItems);
+			console.log(updatedItems)
 		},
 	});
 

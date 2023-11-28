@@ -62,7 +62,7 @@ const Dashboard = () => {
                             {data?.map((item: TransactionHistory, i: number) => (
                                 <Tr key={`blog-item-${i + 1}-${item.id}`}>
                                     <Td>{item.metadata.payerDetails}</Td>
-                                    <Td>N {formatCurrency(parseInt(item?.amount as string))}</Td>
+                                    <Td>N {formatCurrency(parseInt(item?.amount as string) / 100)}</Td>
                                     <Td>{item?.reference?.substring(0, 20) + '...'}</Td>
                                     <Td>{new Date(item.createdAt).toLocaleString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })}</Td>
                                     <Td>{item.transactionType ?? 'transfer'}</Td>

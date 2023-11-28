@@ -14,10 +14,14 @@ import { MdOutlinePendingActions } from "react-icons/md";
 import { useGetAllInvoice } from "hooks/business";
 import { formatCurrency } from "utils/helpers";
 import { useGetAllCustomers } from "hooks/customer";
+import {jwtDecode} from "jwt-decode"
+import { DecryptedToken } from 'interfaces/Types';
 
 const DashboardHeader = () => {
 	const { token } = useContext(AuthContext);
-	const { data } = useGetBusinessData(token as string);
+	let decryptedToken: DecryptedToken = {userId: 0, exp: 0, iat: 0}
+	decryptedToken = jwtDecode(token as string)
+	const { data } = useGetBusinessData(token as string, decryptedToken.userId);
 	const [timeOfDay, setTimeOfDay] = useState({ time: "", icon: GiSunCloud });
 	const getInvoice = useGetAllInvoice(token as string);
 	const pendingInvoice = getInvoice?.data?.filter(
@@ -62,7 +66,7 @@ const DashboardHeader = () => {
 					title="Balance"
 					sub_Text="Total balance"
 					content={
-						formatCurrency(parseInt((data as BusinessInfoType)?.balance as string ?? "0")) ?? 0
+						formatCurrency(parseInt((data as BusinessInfoType)?.balance as string ?? "0") / 100) ?? 0
 					}
 					icon={<FaRegMoneyBillAlt size={18} color="#00a4d6"/>}
 				/>

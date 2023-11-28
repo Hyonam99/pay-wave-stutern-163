@@ -13,11 +13,12 @@ import { AxiosError } from "axios";
 import { BusinessInfoType, MutationOptionsType, PaginationParams } from "interfaces/Types";
 import { GenerateLinkDto } from "interfaces/Interfaces";
 
-const business_Key = "business";
+
 const invoice_Key = "invoice";
 const transaction_Key = "transactions";
 
-export const useGetBusinessData = (token: string) => {
+export const useGetBusinessData = (token: string, criteria: number) => {
+	const business_Key = `business-${criteria}`;
 	const response = useQuery({
 		queryKey: [business_Key],
 		queryFn: () => getBusinessData(token),
@@ -34,7 +35,7 @@ export const useGetBusinessData = (token: string) => {
 export const useGetInvoice = (invoiceId: number, token: string) => {
 
 	const response = useQuery({
-		queryKey: ["invoice-single"],
+		queryKey: [`single-invoiceId-${invoiceId}`],
 		queryFn: () => getInvoice(invoiceId, token),
 	});
 

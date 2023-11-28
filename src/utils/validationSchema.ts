@@ -8,6 +8,7 @@ const login_Schema = Yup.object({
 const isNumberValid = /^[0]+[7-9]+[0-1]+[0-9]{8}$/; //validates user phone number input
 
 const signup_Schema = Yup.object({
+    userName: Yup.string().required('user name is required'),
     firstName: Yup.string().required('first name is required'),
     lastName: Yup.string().required('last name is required'),
     email: Yup.string().email('Invalid email address').required('email is required'),

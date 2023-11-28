@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "providers/AuthProvider";
 import { useGeneratePaymentLink, useGetInvoice } from "hooks/business";
@@ -18,18 +18,11 @@ import style from "styles/components/main/InvoiceHeader.module.scss";
 const InvoiceDetail = () => {
 	const { token } = useContext(AuthContext);
 	const { id } = useParams();
-	const [newId, setNewId] = useState(id)
-	const { data } = useGetInvoice(Number(newId), token as string);
+	const { data } = useGetInvoice(Number(id), token as string);
 	const getCustomers = useGetAllCustomers(token as string);
 	const findCustomer = getCustomers?.data?.find(
 		(customer: CustomerInfoType) => customer?.id == data?.invoice?.customerId
 	);
-
-	useEffect(() => {
-		if (getCustomers && !getCustomers.isLoading) {
-			setNewId(id)
-		}
-	}, [id])
 	const [paymentLink, setPaymentLink] = useState({ show: false, link: "" });
 	const [isCopied, setIsCopied] = useState(false);
 
@@ -49,7 +42,7 @@ const InvoiceDetail = () => {
 
 	const generate_Link_DTO = {
 		payerEmail: findCustomer?.email as string,
-		amount: parseInt(data?.invoice?.totalAmount as string),
+		amount: parseInt(data?.invoice?.totalAmount as string) * 100,
 	};
 
 	const handleCopyClick = async (textToCopy: string) => {
@@ -114,7 +107,7 @@ const InvoiceDetail = () => {
 							<span>Total Amount:</span>
 							<strong>
 								₦{" "}
-								{formatCurrency(parseInt(data?.invoice?.totalAmount as string))}
+								{formatCurrency(parseInt(data?.invoice?.totalAmount as string) / 100)}
 							</strong>
 						</div>
 						{data?.invoice?.paymentStatus?.toLowerCase() !== "paid" && (

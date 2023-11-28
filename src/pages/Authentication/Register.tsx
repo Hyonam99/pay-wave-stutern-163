@@ -1,5 +1,5 @@
-import React from "react";
-import { Container, Box } from "@mui/material";
+import React, {useState} from "react";
+import { Container, Box, Alert, AlertColor } from "@mui/material";
 import { CustomButton, InputField } from "components";
 import { useFormik } from "formik";
 import style from "styles/pages/auth.module.scss";
@@ -14,10 +14,15 @@ const Register = () => {
 	const {create, isLoading} = useSignup({
 		onSuccess(data: any) {
 			console.log(data)
+			reset_Api_Alert();
 			navigate("/login")
 		},
 		onError(error) {
-			console.log(error)
+			setApiAlert({
+				open: true,
+				intent: "error",
+				message: error?.response?.data?.error,
+			});
 		},
 	})
 
@@ -42,6 +47,18 @@ const Register = () => {
 
 	const { handleSubmit, getFieldProps, touched, errors } = formik;
 
+	const [apiAlert, setApiAlert] = useState({
+		open: false,
+		intent: "",
+		message: "",
+	});
+
+	const reset_Api_Alert = () => {
+		setTimeout(() => {
+			setApiAlert({ open: false, intent: "", message: "" });
+		}, 4000);
+	};
+
 	return (
 		<Container className={style["registration-section"]}>
 			<Box>
@@ -56,8 +73,40 @@ const Register = () => {
 					Create Account
 				</div>
 
+				<div
+					style={{
+						textAlign: "center",
+						fontSize: "14px",
+						fontWeight: "semibold",
+						marginBottom: "11px",
+					}}
+				>
+					All input values should be valid, not generic or samples
+				</div>
+
+				{apiAlert.open && (
+					<Alert severity={apiAlert.intent as AlertColor}>
+						{apiAlert.message}
+					</Alert>
+				)}
+
 				<form onSubmit={handleSubmit} className={style["registration-form"]}>
 					<Box className={style["registration-form_wrapper_inputs"]}>
+						<InputField
+							id="userName"
+							type="text"
+							label="User name"
+							variant="filled"
+							size="small"
+							margin="none"
+							placeholder="enter user name"
+							error={errors.userName !== undefined && touched.userName === true}
+							helperText={
+								errors.userName !== undefined && touched.userName === true
+									? errors.userName : ""
+							}
+							{...getFieldProps("userName")}
+						/>
 						<InputField
 							id="firstName"
 							type="text"

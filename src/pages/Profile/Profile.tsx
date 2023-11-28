@@ -9,11 +9,15 @@ import { useFormik } from "formik";
 import { AuthContext } from "providers/AuthProvider";
 import { useGetBusinessData, useUpdateBusinessInfo } from "hooks/business";
 import { BusinessInfoType } from "interfaces/Types";
+import {jwtDecode} from "jwt-decode"
+import { DecryptedToken } from 'interfaces/Types';
 import style from "styles/pages/profile.module.scss";
 
 const Profile = () => {
 	const { token } = useContext(AuthContext);
-	const { data } = useGetBusinessData(token as string);
+	let decryptedToken: DecryptedToken = {userId: 0, exp: 0, iat: 0}
+	decryptedToken = jwtDecode(token as string)
+	const { data } = useGetBusinessData(token as string, decryptedToken.userId);
 	const [apiAlert, setApiAlert] = useState({
 		open: false,
 		intent: "",

@@ -23,7 +23,7 @@ const InvoiceBar = (props: InvoiceDetailsType) => {
 					</div>
 					<div className={style["information"]}>
 							<span className={`${style["receiver"]} ${style["info-item"]}`}>Due: {convertTimestamp(paymentDueDate as string)}</span>
-							<h3 className={`${style["amount"]} ${style["info-item"]}`}>₦ {formatCurrency(parseInt(totalAmount as string))}</h3>
+							<h3 className={`${style["amount"]} ${style["info-item"]}`}>₦ {formatCurrency(parseInt(totalAmount as string) / 100)}</h3>
 							<Status status={paymentStatus?.toLowerCase() as string} />
 					</div>
 				</div>
@@ -34,7 +34,7 @@ const InvoiceBar = (props: InvoiceDetailsType) => {
 						</h2>
 						<span className={style["date"]}>Issued: {convertTimestamp(createdAt as string)}</span>
 						<span className={style["receiver"]}>Due: {convertTimestamp(paymentDueDate as string)}</span>
-						<h3 className={style["amount"]}>₦ {formatCurrency(parseInt(totalAmount as string))}</h3>
+						<h3 className={style["amount"]}>₦ {formatCurrency(parseInt(totalAmount as string) / 100)}</h3>
                     <span><Status status={paymentStatus?.toLowerCase() as string} /></span>
 					<span><FaRegEye color="#00a4d6"/></span>
 				</div>

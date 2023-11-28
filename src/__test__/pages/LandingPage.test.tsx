@@ -1,12 +1,13 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import {LandingPage} from '../../pages';
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import { LandingPage } from "../../pages";
 
 describe("App component", () => {
-    it("renders the Landing Page", () => {
-      render(<LandingPage />);
-  
-      const linkElement = screen.getByText(/LandingPage/i);
-      expect(linkElement).toBeInTheDocument();
-    })
-})
+	it("renders the Landing Page", () => {
+		render(<LandingPage />);
+
+		expect(screen.getByText("Pay wave")).toBeInTheDocument()
+		expect(screen.getByTestId("hero-container")).toBeInTheDocument()
+		expect(screen.getByTestId("hero-description")).toBeInTheDocument()
+	});
+});
