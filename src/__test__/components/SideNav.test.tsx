@@ -1,5 +1,6 @@
 import React from 'react';
-import { render, screen } from "../../utils/TestWrapper";
+import { render, screen } from "utils/TestWrapper";
+import '@testing-library/jest-dom';
 import { SideNav } from 'components';
 
 describe("App component", () => {

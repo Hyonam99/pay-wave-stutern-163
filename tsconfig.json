@@ -7,7 +7,7 @@
       "esnext"
     ],
     "target": "ESNext",    
-    // "types": ["vite/client", "jest"],
+    "types": ["vite/client", "jest"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -23,7 +23,8 @@
     "jsx": "react",
     "paths": {
       "pages/*": ["src/pages/*"],
-      "components/*": ["src/components/*"]
+      "components/*": ["src/components/*"],
+      "styles/*": ["src/styles/*"],
     },
   },
   "include": [
