@@ -1,6 +1,6 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
-import { LandingPage } from "../../pages/index";
+import { render, screen } from "../../utils/TestWrapper";
+import { LandingPage } from "pages";
 
 describe("App component", () => {
 	it("renders the Landing Page", () => {
