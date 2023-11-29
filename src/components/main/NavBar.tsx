@@ -36,7 +36,7 @@ export const NavLinks = () => {
 	return (
 		<div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
 			<Link to={token ? "/dashboard" : "/login"}>
-				<CustomButton title={token ? "Dashboard" : "Log In"} />
+				<CustomButton title={token ? "Dashboard" : "Log In"} isLoading={false} className={style.login_btn}/>
 			</Link>
 
 			{!token && (

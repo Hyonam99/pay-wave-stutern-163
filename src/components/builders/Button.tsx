@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 import React from "react";
-import { Button } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 import style from "styles/components/builders/Ministyles.module.scss";
 import { CustomButtonProps } from "interfaces/Interfaces";
 
@@ -17,7 +17,7 @@ const CustomButton = (props: CustomButtonProps): React.JSX.Element => {
 			onClick={onClick}
 			className={`${style.custom_button} ${className}`}
 		>
-			{isLoading ? "Loading..." : title}
+			{isLoading ? <CircularProgress color="inherit" size={24}/> : title}
 		</Button>
 	);
 };

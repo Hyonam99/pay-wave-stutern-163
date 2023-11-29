@@ -1,5 +1,5 @@
-import React from "react";
-import { Container, Box, Checkbox } from "@mui/material";
+import React, { useState } from "react";
+import { Container, Box, Checkbox, IconButton } from "@mui/material";
 import { CustomButton, InputField } from "components";
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
@@ -8,6 +8,8 @@ import { login_Schema } from "../../utils/validationSchema";
 import { LoginDTO } from "interfaces/Interfaces";
 import { useNavigate } from "react-router-dom";
 import { useLogin } from "hooks/auth";
+import InputAdornment from '@mui/material/InputAdornment';
+import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 
 const Login = () => {
     const navigate = useNavigate()
@@ -33,6 +35,14 @@ const Login = () => {
 	});
 
 	const { handleSubmit, getFieldProps, touched, errors } = formik;
+
+	const [showPassword, setShowPassword] = useState(false);
+
+	const handleClickShowPassword = () => setShowPassword((show) => !show);
+  
+	const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+		event.preventDefault();
+	};
 
 	return (
 		<Container className={style["registration-section"]}>
@@ -80,6 +90,17 @@ const Login = () => {
 									? errors.password
 									: ""
 							}
+							InputProps={{endAdornment: <InputAdornment position="end">
+								<IconButton
+									aria-label="toggle password visibility"
+									onClick={handleClickShowPassword}
+									onMouseDown={handleMouseDownPassword}
+									edge="end"
+									className={style.toggle_password}
+								>
+									{showPassword ? <IoMdEyeOff /> : <IoMdEye />}
+								</IconButton>
+							</InputAdornment>, disableUnderline: true}}
 							{...getFieldProps("password")}
 						/>
 					</Box>
@@ -92,9 +113,9 @@ const Login = () => {
 							Forgot Password ?
 						</Link>
 					</Box>
-					<CustomButton title="Log in" type="submit" isLoading={isLoading} />
+					<CustomButton title="Log in" type="submit" isLoading={isLoading} className={style.btn_disabled}/>
 				</form>
-				<Box display="flex" alignItems="center" gap=".6rem">
+				<Box className={style.auth_stats}>
 					<span>Don&apos;t have an account ?</span>
 					<Link to="/register">Create one</Link>
 				</Box>

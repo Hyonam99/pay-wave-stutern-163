@@ -9,6 +9,7 @@
         flex-direction: column;
         align-items: center;
         gap: 1.4rem;
+        margin-top: .4rem;
     
         .registration-form_wrapper_inputs {
             display: flex;
@@ -19,6 +20,31 @@
             input {
                 background: white;
                 width: 100%;
+
+            }
+
+            .toggle_password {
+                background: transparent;
+                width: fit-content;
+                height: fit-content;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-top: 8px;
+                margin-left: -6px;
+
+                svg {
+                    font-size: 24px;
+                }
+
+                &:hover,
+                &:focus,
+                &:active {
+                    transition: none;
+                    background: transparent;
+                    width: fit-content;
+                    height: fit-content;
+                }
             }
         
         }
@@ -26,6 +52,13 @@
         button {
             margin-bottom: .4rem;
             width: 100%;
+        }
+
+        .btn_disabled {
+            &:disabled {
+                width: 100% !important;
+                height: toRem(38.78) !important;
+            }
         }
 
     }
@@ -36,11 +69,42 @@
         align-items: center;
         gap: 1.4rem;
     
+        .btn_disabled {
+            &:disabled {
+                width: 100% !important;
+                height: toRem(38.78) !important;
+            }
+        }
+        
         .login-form_wrapper_inputs {
             display: flex;
             flex-direction: column;
             gap: 1rem;
             width: 100%;
+
+            .toggle_password {
+                background: transparent;
+                width: fit-content;
+                height: fit-content;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-top: 8px;
+                margin-left: -6px;
+
+                svg {
+                    font-size: 24px;
+                }
+
+                &:hover,
+                &:focus,
+                &:active {
+                    transition: none;
+                    background: transparent;
+                    width: fit-content;
+                    height: fit-content;
+                }
+            }
 
             input {
                 background: white;
@@ -61,6 +125,18 @@
             width: 100%;
         }
 
+    }
+
+    .auth_stats {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: .6rem;
+
+        a {
+            color: $primary-color-dark;
+            font-weight: bold;
+        }
     }
 
     .fgp-link{

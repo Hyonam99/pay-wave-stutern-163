@@ -21,6 +21,20 @@
 	transform: scale(1.2);
 }
 
+/**STYLES FOR THE CUSTOM BUTTON*/
+.custom_button {
+	border-radius: 5px !important;
+	padding: 4px 16px !important;
+}
+
+/**MEDIA QUERY STYLES FOR THE CUSTOM BUTTON */
+
+@media screen and (max-width: 214px) {
+	.custom_button {
+		font-size: 0.7rem !important;
+	}
+}
+
 /**STYLES FOR THE HAMBURGER MENU */
 
 .wrapper {
@@ -70,17 +84,10 @@
 	font-weight: bold;
 }
 
+/**MEDIA QUERY STYLES FOR THE HAMBURGER MENU */
 @media screen and (min-width: 768px) {
 	.hamburger-menu {
 		display: none;
-	}
-}
-
-/**STYLES FOR THE CUSTOM BUTTON */
-
-@media screen and (max-width: 214px) {
-	.custom_button {
-		font-size: 0.7rem !important;
 	}
 }
 

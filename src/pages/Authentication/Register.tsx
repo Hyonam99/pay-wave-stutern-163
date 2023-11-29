@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { Container, Box, Alert, AlertColor } from "@mui/material";
+import { Container, Box, Alert, AlertColor, IconButton  } from "@mui/material";
 import { CustomButton, InputField } from "components";
 import { useFormik } from "formik";
 import style from "styles/pages/auth.module.scss";
@@ -7,6 +7,8 @@ import { signup_Schema } from "../../utils/validationSchema";
 import { SignupDTO } from "interfaces/Interfaces";
 import { Link, useNavigate } from "react-router-dom";
 import {useSignup} from "hooks/auth";
+import InputAdornment from '@mui/material/InputAdornment';
+import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 
 const Register = () => {
 
@@ -59,6 +61,14 @@ const Register = () => {
 		}, 4000);
 	};
 
+	const [showPassword, setShowPassword] = useState(false);
+
+	const handleClickShowPassword = () => setShowPassword((show) => !show);
+  
+	const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+		event.preventDefault();
+	};
+
 	return (
 		<Container className={style["registration-section"]}>
 			<Box>
@@ -81,7 +91,7 @@ const Register = () => {
 						marginBottom: "11px",
 					}}
 				>
-					All input values should be valid, not generic or samples
+					All input values should be valid, not generic or sample values
 				</div>
 
 				{apiAlert.open && (
@@ -105,6 +115,7 @@ const Register = () => {
 								errors.userName !== undefined && touched.userName === true
 									? errors.userName : ""
 							}
+
 							{...getFieldProps("userName")}
 						/>
 						<InputField
@@ -189,7 +200,7 @@ const Register = () => {
 
 						<InputField
 							id="password"
-							type="password"
+							type={showPassword ? 'text' : 'password'}
 							label="Password"
 							variant="filled"
 							size="small"
@@ -200,14 +211,25 @@ const Register = () => {
 								errors.password !== undefined && touched.password === true
 									? errors.password : ""
 							}
+							InputProps={{endAdornment: <InputAdornment position="end">
+								<IconButton
+									aria-label="toggle password visibility"
+									onClick={handleClickShowPassword}
+									onMouseDown={handleMouseDownPassword}
+									edge="end"
+									className={style.toggle_password}
+								>
+									{showPassword ? <IoMdEyeOff /> : <IoMdEye />}
+								</IconButton>
+							</InputAdornment>, disableUnderline: true}}
 							{...getFieldProps("password")}
 						/>
 
 					</Box>
-					<CustomButton title="Create" type="submit" isLoading={isLoading} />
+					<CustomButton title="Create" type="submit" isLoading={isLoading} className={style.btn_disabled}/>
 				</form>
-				<Box display="flex" alignItems="center" gap=".6rem">
-						<span>already have an account ?</span>
+				<Box className={style.auth_stats}>
+						<span>Already have an account ?</span>
 						<Link to="/login">Log In</Link>
 				</Box>
 			</Box>
