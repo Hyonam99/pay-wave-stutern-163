@@ -42,7 +42,7 @@ const InvoiceDetail = () => {
 
 	const generate_Link_DTO = {
 		payerEmail: findCustomer?.email as string,
-		amount: parseInt(data?.invoice?.totalAmount as string) * 100,
+		amount: parseInt(data?.invoice?.totalAmount as string),
 	};
 
 	const handleCopyClick = async (textToCopy: string) => {

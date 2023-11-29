@@ -67,7 +67,6 @@ const CreateInvoice = ({onClose} : {onClose: () => void}) => {
 				price: item.price * 100
 			}})
 			createInvoice(updatedItems);
-			console.log(updatedItems)
 		},
 	});
 
