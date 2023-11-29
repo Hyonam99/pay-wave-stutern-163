@@ -11,6 +11,8 @@ module.exports = {
   // The directory where Jest should output its coverage files
   coverageDirectory: "coverage",
 
+  preset: "ts-jest/presets/js-with-ts",
+
   // An array of file extensions your modules use
   moduleFileExtensions: [
     "js",
@@ -32,7 +34,7 @@ module.exports = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
 
   // The test environment that will be used for testing
-  testEnvironment: "jsdom",
+  testEnvironment: "jest-environment-jsdom",
 
   // A map from regular expressions to paths to transformers
   transform: {

@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
-    "target": "es5",
     "baseUrl": "src",
     "lib": [
       "dom",
       "dom.iterable",
       "esnext"
     ],
+    "target": "ESNext",    
+    "types": ["vite/client"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -19,11 +20,11 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react"
-  },
-  "paths": {
-    "pages/*": ["./src/pages/*"],
-    "components/*": ["./src/components/*"]
+    "jsx": "react",
+    "paths": {
+      "pages/*": ["src/pages/*"],
+      "components/*": ["src/components/*"]
+    },
   },
   "include": [
     "src", 
