@@ -1,6 +1,5 @@
 import React from "react";
-// import { fireEvent, render, screen } from "utils/TestWrapper";
-import { render, fireEvent, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from "utils/TestWrapper";
 import '@testing-library/jest-dom';
 import { CustomButton } from "components";
 import { CustomButtonProps } from "interfaces/Interfaces";
