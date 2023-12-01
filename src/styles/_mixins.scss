@@ -18,11 +18,13 @@
 	font-weight: normal;
 }
 
-/*custom background styling for the main sections in the auth layout: for large screens*/
-@mixin main-content-bg {
-    background: white;
-    padding: 0 2rem 2rem 2rem;
-    border-radius: .8rem;
+/*custom styling for links like buttons*/
+@mixin link-btn {
+    text-align: center;
+    padding: 8px 16px !important;
+    border-radius: 5px !important;
+    background: $primary-color;
+    color: white;
 }
 
 @mixin main-content-bg-lg {

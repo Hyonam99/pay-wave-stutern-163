@@ -6,17 +6,15 @@ import { Link } from "react-router-dom";
 import style from "styles/pages/auth.module.scss";
 import { login_Schema } from "../../utils/validationSchema";
 import { LoginDTO } from "interfaces/Interfaces";
-import { useNavigate } from "react-router-dom";
 import { useLogin } from "hooks/auth";
 import InputAdornment from '@mui/material/InputAdornment';
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 
 const Login = () => {
-    const navigate = useNavigate()
 	const {create, isLoading} = useLogin({
 		onSuccess(data: any) {
 			localStorage.setItem("paywave-token", data?.data?.token)
-			navigate("/dashboard")
+			window.location.replace("/dashboard")
 		},
 		onError(error) {
 			console.log(error)
@@ -79,7 +77,7 @@ const Login = () => {
 						<InputField
 							id="password"
 							label="Password"
-							type="password"
+							type={showPassword ? "text" : "password"}
 							variant="filled"
 							size="small"
 							margin="none"

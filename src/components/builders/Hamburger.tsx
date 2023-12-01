@@ -1,44 +1,62 @@
-import React, { useContext, useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
+import Button from "@mui/material/Button";
 import { motion, AnimatePresence } from "framer-motion";
-import { BsMenuButtonWide } from "react-icons/bs";
-import { IconButton, Avatar } from "@mui/material";
+import { Avatar } from "@mui/material";
+import { CgMenuCheese } from "react-icons/cg";
 import { MdOutlineCancel } from "react-icons/md";
-import style from "styles/components/builders/Ministyles.module.scss"
+import { logoutBusiness } from "api/services";
+import { AuthContext } from "providers/AuthProvider";
 import Logo from "./Logo";
 import CustomButton from "./Button";
 import { Link } from "react-router-dom";
-import { logoutBusiness } from "api/services";
-import { AuthContext } from "providers/AuthProvider";
+import style from "styles/components/builders/Ministyles.module.scss";
+
 
 const Hamburger = () => {
-	const [isOpen, setIsOpen] = useState(false);
-	const {token} = useContext(AuthContext)
+    const {token} = useContext(AuthContext)
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 	const logOut = () => {
 		logoutBusiness()
 		window.location.replace("/")
 	}
 
-	return (
-		<div className={style["wrapper"]}>
-			<IconButton
-				id="basic-button"
-				aria-controls={isOpen ? "basic-menu" : undefined}
-				aria-haspopup="true"
-				aria-expanded={isOpen ? "true" : undefined}
-				onClick={() => setIsOpen((isOpen) => !isOpen)}
-			>
-				{isOpen ? 
-					<MdOutlineCancel className={style["hamburger-icon"]} size={32}/>
-					: <BsMenuButtonWide className={style["hamburger-icon"]} size={28}/>
-				}
-			</IconButton>
+	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-			<AnimatePresence>
-				{isOpen && (
+	// Create a function to update the window width state
+	const handleResize = () => {
+		setWindowWidth(window.innerWidth);
+	};
+
+	// Add an event listener for the window resize event when the component mounts
+	useEffect(() => {
+		window.addEventListener("resize", handleResize);
+
+		// Cleanup: Remove the event listener when the component unmounts
+		return () => {
+			window.removeEventListener("resize", handleResize);
+		};
+	}, []);
+
+	useEffect(() => {
+		if (windowWidth > 768) {
+			setIsMenuOpen(false);
+		}
+	}, [windowWidth]);
+
+	const list = () => (
+		<Box
+			sx={{ width: windowWidth < 354 ? "auto" : 260 }}
+			role="presentation"
+			onClick={() => setIsMenuOpen(false)}
+			onKeyDown={() => setIsMenuOpen(false)}
+		>
+            <AnimatePresence>
+				{isMenuOpen && (
 					<motion.ul
 						key="hamburger"
-						className={style["hamburger-menu"]}
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 						transition={{ duration: 0.5 }}
@@ -86,7 +104,7 @@ const Hamburger = () => {
 										},
 									}}
 								>
-									<Link to="/dashboard" onClick={() => setIsOpen((isOpen) => !isOpen)}>
+									<Link to="/dashboard" onClick={() => setIsMenuOpen((isOpen) => !isOpen)}>
 										Dashboard
 									</Link>	
 								</motion.li>
@@ -104,7 +122,7 @@ const Hamburger = () => {
 										},
 									}}
 								>
-									<Link to="/invoices" onClick={() => setIsOpen((isOpen) => !isOpen)}>
+									<Link to="/invoices" onClick={() => setIsMenuOpen((isOpen) => !isOpen)}>
 										Invoices
 									</Link>	
 								</motion.li>
@@ -122,7 +140,7 @@ const Hamburger = () => {
 										},
 									}}
 								>
-									<Link to="/customers" onClick={() => setIsOpen((isOpen) => !isOpen)}>
+									<Link to="/customers" onClick={() => setIsMenuOpen((isOpen) => !isOpen)}>
 										Customers
 									</Link>	
 								</motion.li>
@@ -143,7 +161,7 @@ const Hamburger = () => {
 									<CustomButton
 										title="Signout"
 										outlined
-										onClick={() => {setIsOpen((isOpen) => !isOpen); logOut()}}
+										onClick={() => {setIsMenuOpen((isOpen) => !isOpen); logOut()}}
 									/>
 								</motion.li>
 							</>
@@ -163,7 +181,7 @@ const Hamburger = () => {
 										},
 									}}
 								>
-									<Link to="/login" onClick={() => setIsOpen((isOpen) => !isOpen)}>
+									<Link to="/login" onClick={() => setIsMenuOpen((isOpen) => !isOpen)}>
 										Log In
 									</Link>								
 								</motion.li>
@@ -181,7 +199,7 @@ const Hamburger = () => {
 										},
 									}}
 								>
-									<Link to="/register" onClick={() => setIsOpen((isOpen) => !isOpen)}>
+									<Link to="/register" onClick={() => setIsMenuOpen((isOpen) => !isOpen)}>
 										Register
 									</Link>								
 								</motion.li>
@@ -190,6 +208,27 @@ const Hamburger = () => {
 					</motion.ul>
 				)}
 			</AnimatePresence>
+		</Box>
+	);
+
+	return (
+		<div>
+			<Button onClick={() => setIsMenuOpen(!isMenuOpen)}>
+				{isMenuOpen ? (
+					<MdOutlineCancel className={style["hamburger-icon-cancel"]} size={32} />
+				) : (
+					<CgMenuCheese className={style["hamburger-icon"]} size={28} />
+				)}
+			</Button>
+			<Drawer
+				anchor={"left"}
+				open={isMenuOpen}
+				onClose={() => setIsMenuOpen(false)}
+				transitionDuration={880}
+                className={style["hamburger-menu"]}
+			>
+				{list()}
+			</Drawer>
 		</div>
 	);
 };

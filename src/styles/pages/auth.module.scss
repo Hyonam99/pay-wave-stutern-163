@@ -146,6 +146,18 @@
 
 }
 
+.proceed_link {
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    padding: .6rem 0;
+    justify-content: center !important;
+
+    a {
+        @include link-btn();
+    }
+}
+
 @media screen and (max-width: 564px) {
     .registration-section {
         padding: 1.2rem 1rem !important;

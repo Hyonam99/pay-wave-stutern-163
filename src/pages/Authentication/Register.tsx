@@ -1,23 +1,24 @@
-import React, {useState} from "react";
-import { Container, Box, Alert, AlertColor, IconButton  } from "@mui/material";
+import React, { useState } from "react";
+import { Container, Box, Alert, AlertColor, IconButton } from "@mui/material";
 import { CustomButton, InputField } from "components";
 import { useFormik } from "formik";
 import style from "styles/pages/auth.module.scss";
 import { signup_Schema } from "../../utils/validationSchema";
 import { SignupDTO } from "interfaces/Interfaces";
-import { Link, useNavigate } from "react-router-dom";
-import {useSignup} from "hooks/auth";
-import InputAdornment from '@mui/material/InputAdornment';
+import { Link } from "react-router-dom";
+import { useSignup } from "hooks/auth";
+import InputAdornment from "@mui/material/InputAdornment";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
 
 const Register = () => {
-
-	const navigate = useNavigate()
-	const {create, isLoading} = useSignup({
+	const { create, isLoading } = useSignup({
 		onSuccess(data: any) {
-			console.log(data)
+			localStorage.setItem("paywave-token", data?.data?.token)
+			console.log(data);
+			setIsShown(true)
 			reset_Api_Alert();
-			navigate("/login")
 		},
 		onError(error) {
 			setApiAlert({
@@ -26,7 +27,7 @@ const Register = () => {
 				message: error?.response?.data?.error,
 			});
 		},
-	})
+	});
 
 	const initial_Signup_Values: SignupDTO = {
 		firstName: "",
@@ -43,7 +44,7 @@ const Register = () => {
 		validateOnBlur: true,
 		validationSchema: signup_Schema,
 		onSubmit: (values: SignupDTO) => {
-			create(values)
+			create(values);
 		},
 	});
 
@@ -61,12 +62,19 @@ const Register = () => {
 		}, 4000);
 	};
 
+	const [isShown, setIsShown] = useState(false);
 	const [showPassword, setShowPassword] = useState(false);
 
 	const handleClickShowPassword = () => setShowPassword((show) => !show);
-  
-	const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+
+	const handleMouseDownPassword = (
+		event: React.MouseEvent<HTMLButtonElement>
+	) => {
 		event.preventDefault();
+	};
+
+	const handleClose = () => {
+		setIsShown(false);
 	};
 
 	return (
@@ -113,9 +121,9 @@ const Register = () => {
 							error={errors.userName !== undefined && touched.userName === true}
 							helperText={
 								errors.userName !== undefined && touched.userName === true
-									? errors.userName : ""
+									? errors.userName
+									: ""
 							}
-
 							{...getFieldProps("userName")}
 						/>
 						<InputField
@@ -126,10 +134,13 @@ const Register = () => {
 							size="small"
 							margin="none"
 							placeholder="enter first name"
-							error={errors.firstName !== undefined && touched.firstName === true}
+							error={
+								errors.firstName !== undefined && touched.firstName === true
+							}
 							helperText={
 								errors.firstName !== undefined && touched.firstName === true
-									? errors.firstName : ""
+									? errors.firstName
+									: ""
 							}
 							{...getFieldProps("firstName")}
 						/>
@@ -145,7 +156,8 @@ const Register = () => {
 							error={errors.lastName !== undefined && touched.lastName === true}
 							helperText={
 								errors.lastName !== undefined && touched.lastName === true
-									? errors.lastName : ""
+									? errors.lastName
+									: ""
 							}
 							{...getFieldProps("lastName")}
 						/>
@@ -161,7 +173,8 @@ const Register = () => {
 							error={errors.email !== undefined && touched.email === true}
 							helperText={
 								errors.email !== undefined && touched.email === true
-									? errors.email : ""
+									? errors.email
+									: ""
 							}
 							{...getFieldProps("email")}
 						/>
@@ -174,10 +187,15 @@ const Register = () => {
 							size="small"
 							margin="none"
 							placeholder="enter business name"
-							error={errors.businessName !== undefined && touched.businessName === true}
+							error={
+								errors.businessName !== undefined &&
+								touched.businessName === true
+							}
 							helperText={
-								errors.businessName !== undefined && touched.businessName === true
-									? errors.businessName : ""
+								errors.businessName !== undefined &&
+								touched.businessName === true
+									? errors.businessName
+									: ""
 							}
 							{...getFieldProps("businessName")}
 						/>
@@ -190,17 +208,20 @@ const Register = () => {
 							size="small"
 							margin="none"
 							placeholder="enter phone number"
-							error={errors.phoneNumber !== undefined && touched.phoneNumber === true}
+							error={
+								errors.phoneNumber !== undefined && touched.phoneNumber === true
+							}
 							helperText={
 								errors.phoneNumber !== undefined && touched.phoneNumber === true
-									? errors.phoneNumber : ""
+									? errors.phoneNumber
+									: ""
 							}
 							{...getFieldProps("phoneNumber")}
 						/>
 
 						<InputField
 							id="password"
-							type={showPassword ? 'text' : 'password'}
+							type={showPassword ? "text" : "password"}
 							label="Password"
 							variant="filled"
 							size="small"
@@ -209,30 +230,57 @@ const Register = () => {
 							error={errors.password !== undefined && touched.password === true}
 							helperText={
 								errors.password !== undefined && touched.password === true
-									? errors.password : ""
+									? errors.password
+									: ""
 							}
-							InputProps={{endAdornment: <InputAdornment position="end">
-								<IconButton
-									aria-label="toggle password visibility"
-									onClick={handleClickShowPassword}
-									onMouseDown={handleMouseDownPassword}
-									edge="end"
-									className={style.toggle_password}
-								>
-									{showPassword ? <IoMdEyeOff /> : <IoMdEye />}
-								</IconButton>
-							</InputAdornment>, disableUnderline: true}}
+							InputProps={{
+								endAdornment: (
+									<InputAdornment position="end">
+										<IconButton
+											aria-label="toggle password visibility"
+											onClick={handleClickShowPassword}
+											onMouseDown={handleMouseDownPassword}
+											edge="end"
+											className={style.toggle_password}
+										>
+											{showPassword ? <IoMdEyeOff /> : <IoMdEye />}
+										</IconButton>
+									</InputAdornment>
+								),
+								disableUnderline: true,
+							}}
 							{...getFieldProps("password")}
 						/>
-
 					</Box>
-					<CustomButton title="Create" type="submit" isLoading={isLoading} className={style.btn_disabled}/>
+					<CustomButton
+						title="Create"
+						type="submit"
+						isLoading={isLoading}
+						className={style.btn_disabled}
+					/>
 				</form>
 				<Box className={style.auth_stats}>
-						<span>Already have an account ?</span>
-						<Link to="/login">Log In</Link>
+					<span>Already have an account ?</span>
+					<Link to="/login">Log In</Link>
 				</Box>
 			</Box>
+
+			<Dialog
+				open={isShown}
+				onClose={handleClose}
+				aria-labelledby="alert-dialog-title"
+				aria-describedby="alert-dialog-description"
+			>
+				<DialogContent>
+					To proceed, you need to update your full business details.
+					Click &quot;proceed&quot; below to continue
+				</DialogContent>
+				<Box className={style.proceed_link}>
+					<Link to="/profile">
+						Proceed
+					</Link>
+				</Box>
+			</Dialog>
 		</Container>
 	);
 };

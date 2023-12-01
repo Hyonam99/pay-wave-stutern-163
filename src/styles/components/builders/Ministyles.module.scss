@@ -45,29 +45,41 @@
 	color: $primary-color;
 }
 
-.hamburger-menu {
-	position: absolute;
-	left: 0;
-	top: -13px;
-	z-index: 60;
-	min-height: 100vh;
-	width: 48%;
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	padding-top: 0.2rem;
-	gap: 1.7rem;
-	background: $secondary-color;
-	padding-left: 1rem !important;
+.hamburger-icon-cancel {
 	color: $primary-color;
+	z-index: 5000 !important;
+}
 
-	li {
-		list-style-type: none;
 
-		a {
-			color: $primary-color;
+
+.hamburger-menu {
+	padding-left: 1rem !important;
+
+	//style the menu drawer
+	>div:nth-child(3) {
+		background: $secondary-color !important;
+	}
+
+	ul {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		padding-top: 1rem;
+		padding-left: 1rem !important;
+		padding-right: .7rem !important;
+		margin: 0 !important;
+		height: auto;
+		gap: 1.7rem;
+
+		li {
+			list-style-type: none;
+	
+			a {
+				color: $primary-color;
+			}
 		}
 	}
+
 }
 
 .user-info {

@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
 import { Link } from "react-router-dom";
-import { Logo, Hamburger, CustomButton } from "components";
+import { Logo, CustomButton, Hamburger } from "components";
 import { AuthContext } from "providers/AuthProvider";
 import style from "styles/components/main/NavBar.module.scss";
 
