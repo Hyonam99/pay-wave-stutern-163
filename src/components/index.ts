@@ -18,6 +18,7 @@ import CreateInvoice from "./main/CreateInvoice";
 import CustomerList from "./main/CustomerList"
 import CustomerBar from "./builders/CustomerBar"
 import CustomerDetail from "./main/CustomerDetail";
+import LinkButton from "./builders/LinkButton"
 
 export {
 	CustomButton,
@@ -39,5 +40,6 @@ export {
 	CreateInvoice,
 	CustomerList,
 	CustomerBar,
-	CustomerDetail
+	CustomerDetail,
+	LinkButton
 };

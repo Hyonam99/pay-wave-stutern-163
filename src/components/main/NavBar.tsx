@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
 import { Link } from "react-router-dom";
-import { Logo, CustomButton, Hamburger } from "components";
+import { Logo, Hamburger, LinkButton } from "components";
 import { AuthContext } from "providers/AuthProvider";
 import style from "styles/components/main/NavBar.module.scss";
 
@@ -35,14 +35,10 @@ export const NavLinks = () => {
 
 	return (
 		<div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-			<Link to={token ? "/dashboard" : "/login"}>
-				<CustomButton title={token ? "Dashboard" : "Log In"} isLoading={false} className={style.login_btn}/>
-			</Link>
+			<LinkButton to={token ? "/dashboard" : "/login"} title={token ? "Dashboard" : "Log In"}/>
 
 			{!token && (
-				<Link to="/register">
-					<CustomButton title="Register" outlined={true}/>
-				</Link>
+				<LinkButton to="/register" title="Register" outlined={true}/>
 			)}
 		</div>
 	);

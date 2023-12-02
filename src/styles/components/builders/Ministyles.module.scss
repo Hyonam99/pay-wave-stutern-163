@@ -21,10 +21,12 @@
 	transform: scale(1.2);
 }
 
-/**STYLES FOR THE CUSTOM BUTTON*/
-.custom_button {
-	border-radius: 5px !important;
-	padding: 4px 16px !important;
+.link_Button {
+	@include link-btn();
+}
+
+.link_outlined {
+	@include link-btn-outlined();
 }
 
 /**MEDIA QUERY STYLES FOR THE CUSTOM BUTTON */

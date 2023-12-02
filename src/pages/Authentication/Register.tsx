@@ -3,6 +3,7 @@ import { Container, Box, Alert, AlertColor, IconButton } from "@mui/material";
 import { CustomButton, InputField } from "components";
 import { useFormik } from "formik";
 import style from "styles/pages/auth.module.scss";
+import { motion } from "framer-motion";
 import { signup_Schema } from "../../utils/validationSchema";
 import { SignupDTO } from "interfaces/Interfaces";
 import { Link } from "react-router-dom";
@@ -79,7 +80,11 @@ const Register = () => {
 
 	return (
 		<Container className={style["registration-section"]}>
-			<Box>
+			<motion.div
+				initial={{ opacity: 0, scale: 0.5 }}
+				animate={{ opacity: 1, scale: 1 }}
+				transition={{ ease: "easeOut", duration: 1 }}		
+			>
 				<div
 					style={{
 						textAlign: "center",
@@ -263,7 +268,7 @@ const Register = () => {
 					<span>Already have an account ?</span>
 					<Link to="/login">Log In</Link>
 				</Box>
-			</Box>
+			</motion.div>
 
 			<Dialog
 				open={isShown}

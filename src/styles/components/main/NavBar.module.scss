@@ -37,13 +37,6 @@
       align-items: center;
       gap: 1rem;
 
-      .login_btn {
-
-        &:disabled {
-          width: toRem(85.95) !important;
-          height: toRem(40.78) !important;
-        }
-      }
     }
 
     .mobile-hamburger {

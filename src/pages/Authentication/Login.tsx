@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Container, Box, Checkbox, IconButton } from "@mui/material";
 import { CustomButton, InputField } from "components";
 import { useFormik } from "formik";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import style from "styles/pages/auth.module.scss";
 import { login_Schema } from "../../utils/validationSchema";
@@ -44,7 +45,11 @@ const Login = () => {
 
 	return (
 		<Container className={style["registration-section"]}>
-			<Box>
+			<motion.div
+				initial={{ opacity: 0, scale: 0.5 }}
+				animate={{ opacity: 1, scale: 1 }}
+				transition={{ ease: "easeOut", duration: 1 }}	
+			>
 				<div
 					style={{
 						textAlign: "center",
@@ -117,7 +122,7 @@ const Login = () => {
 					<span>Don&apos;t have an account ?</span>
 					<Link to="/register">Create one</Link>
 				</Box>
-			</Box>
+			</motion.div>
 		</Container>
 	);
 };
