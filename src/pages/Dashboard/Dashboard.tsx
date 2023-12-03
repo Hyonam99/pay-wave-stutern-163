@@ -27,7 +27,7 @@ const Dashboard = () => {
         limit: 5
     });
 
-	const {data, pagination } = useGetAllTransactions(paginationParam, token as string)
+	const {data, pagination, isLoading } = useGetAllTransactions(paginationParam, token as string)
 
 	const pageCount = Math.ceil(pagination?.totalItems / paginationParam.limit) ?? 1
 	const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
@@ -45,7 +45,7 @@ const Dashboard = () => {
 				exit="exit"
 			>
 				<DashboardHeader />
-				{!data && <EmptyContent />}
+				{(!data && !isLoading) && <EmptyContent />}
 				
 				<TableContainer className={style['dashboard-table-container']}>
                     <Table variant='striped' colorScheme='blackAlpha' width="90%" marginX="auto">

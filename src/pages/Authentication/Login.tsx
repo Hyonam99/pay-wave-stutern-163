@@ -15,7 +15,7 @@ const Login = () => {
 	const {create, isLoading} = useLogin({
 		onSuccess(data: any) {
 			localStorage.setItem("paywave-token", data?.data?.token)
-			window.location.replace("/dashboard")
+			window.location.href = "/dashboard"
 		},
 		onError(error) {
 			console.log(error)

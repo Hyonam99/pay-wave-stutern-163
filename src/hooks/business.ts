@@ -16,9 +16,9 @@ import { GenerateLinkDto } from "interfaces/Interfaces";
 
 const invoice_Key = "invoice";
 const transaction_Key = "transactions";
+const business_Key = `business`;
 
-export const useGetBusinessData = (token: string, criteria: number) => {
-	const business_Key = `business-${criteria}`;
+export const useGetBusinessData = (token: string) => {
 	const response = useQuery({
 		queryKey: [business_Key],
 		queryFn: () => getBusinessData(token),

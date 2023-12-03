@@ -78,6 +78,10 @@ const Register = () => {
 		setIsShown(false);
 	};
 
+	const handleProceed = () => {
+		window.location.href = "/profile"
+	}
+
 	return (
 		<Container className={style["registration-section"]}>
 			<motion.div
@@ -281,9 +285,7 @@ const Register = () => {
 					Click &quot;proceed&quot; below to continue
 				</DialogContent>
 				<Box className={style.proceed_link}>
-					<Link to="/profile">
-						Proceed
-					</Link>
+					<CustomButton title="Proceed" onClick={handleProceed}/>
 				</Box>
 			</Dialog>
 		</Container>

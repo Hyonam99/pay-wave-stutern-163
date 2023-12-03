@@ -9,15 +9,11 @@ import { useFormik } from "formik";
 import { AuthContext } from "providers/AuthProvider";
 import { useGetBusinessData, useUpdateBusinessInfo } from "hooks/business";
 import { BusinessInfoType } from "interfaces/Types";
-import {jwtDecode} from "jwt-decode"
-import { DecryptedToken } from 'interfaces/Types';
 import style from "styles/pages/profile.module.scss";
 
 const Profile = () => {
 	const { token } = useContext(AuthContext);
-	let decryptedToken: DecryptedToken = {userId: 0, exp: 0, iat: 0}
-	decryptedToken = jwtDecode(token as string)
-	const { data } = useGetBusinessData(token as string, decryptedToken.userId);
+	const { data } = useGetBusinessData(token as string ?? "");
 	const [apiAlert, setApiAlert] = useState({
 		open: false,
 		intent: "",
@@ -27,13 +23,14 @@ const Profile = () => {
 	const {updateBusinessInfo, isLoading, isError} = useUpdateBusinessInfo(
 		{
 			onSuccess: (data: serviceResponse) => {
+				console.log(data)
 				setApiAlert({
 					open: data.success,
 					intent: "success",
 					message: data.message,
 				});
 				reset_Api_Alert()
-				window.location.reload()
+				// window.location.reload()
 			},
 			onError: (error: any) => {
 				setApiAlert({
@@ -41,7 +38,7 @@ const Profile = () => {
 					intent: "error",
 					message: error?.response?.data?.error,
 				});
-				reset_Api_Alert()
+				// reset_Api_Alert()
 			},
 		}, token as string
 	)
@@ -53,11 +50,11 @@ const Profile = () => {
 	};
 
 	const initial_Customer_Values: BusinessInfoType = {
-		businessName: data?.businessName,
-		email: data?.email,
-		phoneNumber: data?.phoneNumber ?? "",
-		accountName: data?.accountName ?? "",
-		accountNumber: data?.accountNumber ?? "",
+		businessName: data?.businessName ?? "",
+		// email: data?.email,
+		// phoneNumber: data?.phoneNumber ?? "",
+		// accountName: data?.accountName ?? "",
+		// accountNumber: data?.accountNumber ?? "",
 		city: data?.city ?? "",
 		country: data?.country ?? "",
 		streetAddress: data?.streetAddress ?? "",
@@ -106,12 +103,11 @@ const Profile = () => {
 							placeholder=""
 							error={false}
 							helperText=""
-							disabled
 							{...getFieldProps("businessName")}
 							className={style["text-input"]}
 						/>
-						<InputField
-							id="customerName"
+						{/* <InputField
+							id="email"
 							type="email"
 							label="Business email address"
 							variant="filled"
@@ -120,11 +116,10 @@ const Profile = () => {
 							placeholder=""
 							error={false}
 							helperText=""
-							disabled
 							{...getFieldProps("email")}
 							className={style["text-input"]}
-						/>
-						<InputField
+						/> */}
+						{/* <InputField
 							id="phoneNumber"
 							type="text"
 							label="Phone number"
@@ -136,8 +131,8 @@ const Profile = () => {
 							helperText=""
 							{...getFieldProps("phoneNumber")}
 							className={style["text-input"]}
-						/>
-						<Box display="flex" alignItems={"center"} justifyItems={"flex-start"} width={"90%"}>Account Details</Box>
+						/> */}
+						{/* <Box display="flex" alignItems={"center"} justifyItems={"flex-start"} width={"90%"}>Account Details</Box>
 						<InputField
 							id="accountName"
 							type="text"
@@ -163,7 +158,7 @@ const Profile = () => {
 							helperText=""
 							{...getFieldProps("accountNumber")}
 							className={style["text-input"]}
-						/>
+						/> */}
 						<Box display="flex" alignItems={"center"} justifyItems={"flex-start"} width={"90%"}>Contact Details</Box>
 						<InputField
 							id="city"
