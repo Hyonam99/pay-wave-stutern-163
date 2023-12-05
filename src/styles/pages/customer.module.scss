@@ -10,6 +10,10 @@
 	align-items: center;
     padding: .4rem 0;
 
+	button {
+		border-radius: 5px;
+	}
+
     h3 {
         font-size: clamp(1.6rem, 2vw, 2.1rem);
         font-weight: normal;

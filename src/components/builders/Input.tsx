@@ -12,7 +12,7 @@ const InputField = styled((props: TextFieldProps) => (
 ))(({ theme }) => ({
     '& .MuiFilledInput-root': {
         overflow: 'hidden',
-        borderRadius: 7,
+        borderRadius: 5,
         backgroundColor: theme.palette.mode === 'light' ? '#F3F6F9' : '#1A2027',
         border: '1px solid',
         borderColor: theme.palette.mode === 'light' ? '#E0E3E7' : '#2D3843',
