@@ -15,6 +15,13 @@
     flex-grow: 1;    
 }
 
+@media screen and (max-width: 684px) {
+
+    .main-content {
+        min-height: 70svh;   
+    }
+}
+
 /**STYLES THE AUTH LAYOUT HOC (Higher Order Component) */
 
 .auth_container {

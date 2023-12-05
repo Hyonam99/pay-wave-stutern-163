@@ -8,7 +8,6 @@
 	gap: .5rem;
 	text-align: center;
 	margin: 8% 0;
-	// background: radial-gradient(circle, rgba(2, 0, 36, 0) 0, #fafafa 100%);
 }
 
 .main-title {
@@ -36,7 +35,12 @@
 	color: $primary-color;
 }
 
-@media screen and (max-width: 564px) {
+@media screen and (max-width: 684px) {
+
+	.container {
+		margin: 20% 0;
+	}
+
     .main-title {
         font-size: 2.8rem;
     }

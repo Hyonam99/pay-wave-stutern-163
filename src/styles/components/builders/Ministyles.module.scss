@@ -31,9 +31,18 @@
 
 /**MEDIA QUERY STYLES FOR THE CUSTOM BUTTON */
 
-@media screen and (max-width: 214px) {
+@media screen and (max-width: 248px) {
 	.custom_button {
 		font-size: 0.7rem !important;
+		
+		&:disabled {
+			width: toRem(151.406);
+		}
+	}
+
+	.logo-image {
+		height: 2rem;
+		width: 5rem;
 	}
 }
 

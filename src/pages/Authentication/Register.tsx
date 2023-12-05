@@ -17,7 +17,6 @@ const Register = () => {
 	const { create, isLoading } = useSignup({
 		onSuccess(data: any) {
 			localStorage.setItem("paywave-token", data?.data?.token)
-			console.log(data);
 			setIsShown(true)
 			reset_Api_Alert();
 		},
@@ -32,7 +31,6 @@ const Register = () => {
 
 	const initial_Signup_Values: SignupDTO = {
 		firstName: "",
-		userName: "",
 		lastName: "",
 		email: "",
 		businessName: "",
@@ -119,22 +117,6 @@ const Register = () => {
 
 				<form onSubmit={handleSubmit} className={style["registration-form"]}>
 					<Box className={style["registration-form_wrapper_inputs"]}>
-						<InputField
-							id="userName"
-							type="text"
-							label="User name"
-							variant="filled"
-							size="small"
-							margin="none"
-							placeholder="enter user name"
-							error={errors.userName !== undefined && touched.userName === true}
-							helperText={
-								errors.userName !== undefined && touched.userName === true
-									? errors.userName
-									: ""
-							}
-							{...getFieldProps("userName")}
-						/>
 						<InputField
 							id="firstName"
 							type="text"

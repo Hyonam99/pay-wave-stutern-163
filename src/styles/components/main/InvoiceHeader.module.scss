@@ -62,6 +62,15 @@
 			}
 		}
 	}
+
+	.generateLink_btn {
+		border-radius: 5px;
+		
+		&:disabled {
+			width: toRem(219.241);
+			height: toRem(42.7812);
+		}
+	}
 }
 /**MEDIA QUERY FOR THE INVOICE PAGE*/
 @media screen and (min-width: 1000px) {
@@ -109,6 +118,22 @@
 					flex-wrap: wrap;
 					gap: .5rem;
 				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 244px) {
+
+	.invoice-detail-card {
+
+		.generateLink_btn {
+			font-size: 0.7rem !important;
+			
+			&:disabled {
+				font-size: 0.7rem !important;
+				width: toRem(151.406);
+				height: toRem(31.5938)
 			}
 		}
 	}

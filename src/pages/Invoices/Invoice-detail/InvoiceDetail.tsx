@@ -117,6 +117,7 @@ const InvoiceDetail = () => {
 								onClick={() => {
 									generateLink(generate_Link_DTO);
 								}}
+								className={style.generateLink_btn}
 							/>
 						)}
 

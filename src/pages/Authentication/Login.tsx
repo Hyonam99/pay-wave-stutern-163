@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Container, Box, Checkbox, IconButton } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { Container, Box, Checkbox, IconButton, Alert, AlertColor } from "@mui/material";
 import { CustomButton, InputField } from "components";
 import { useFormik } from "formik";
 import { motion } from "framer-motion";
@@ -18,10 +18,17 @@ const Login = () => {
 			window.location.href = "/dashboard"
 		},
 		onError(error) {
-			console.log(error)
+			setApiAlert({
+				open: true,
+				intent: "error",
+				message: error?.response?.data?.error,
+			});
 		},
 	})
 
+	useEffect(() => {
+		reset_Api_Alert()
+	}, [isLoading])
 	const initial_Login_Values: LoginDTO = { email: "", password: "" };
 
 	const formik = useFormik<LoginDTO>({
@@ -43,6 +50,18 @@ const Login = () => {
 		event.preventDefault();
 	};
 
+	const [apiAlert, setApiAlert] = useState({
+		open: false,
+		intent: "",
+		message: "",
+	});
+
+	const reset_Api_Alert = () => {
+		setTimeout(() => {
+			setApiAlert({ open: false, intent: "", message: "" });
+		}, 4000);
+	};
+
 	return (
 		<Container className={style["registration-section"]}>
 			<motion.div
@@ -60,6 +79,12 @@ const Login = () => {
 				>
 					Login
 				</div>
+
+				{apiAlert.open && (
+					<Alert severity={apiAlert.intent as AlertColor}>
+						{apiAlert.message}
+					</Alert>
+				)}
 
 				<form onSubmit={handleSubmit} className={style["login-form"]}>
 					<Box className={style["login-form_wrapper_inputs"]}>

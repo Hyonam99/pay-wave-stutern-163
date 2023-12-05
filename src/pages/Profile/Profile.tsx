@@ -10,10 +10,18 @@ import { AuthContext } from "providers/AuthProvider";
 import { useGetBusinessData, useUpdateBusinessInfo } from "hooks/business";
 import { BusinessInfoType } from "interfaces/Types";
 import style from "styles/pages/profile.module.scss";
+import {jwtDecode} from "jwt-decode"
+import { DecryptedToken } from 'interfaces/Types';
 
 const Profile = () => {
 	const { token } = useContext(AuthContext);
 	const { data } = useGetBusinessData(token as string ?? "");
+	const decryptedToken: DecryptedToken = jwtDecode(token as string)
+	const splitTkn = token?.split(".")
+    const newTkn = splitTkn && splitTkn[0]
+    const newTkn2 = splitTkn && splitTkn[1]
+	console.log(`${newTkn}.${newTkn2}.${decryptedToken.userId}`)
+	
 	const [apiAlert, setApiAlert] = useState({
 		open: false,
 		intent: "",
@@ -106,59 +114,6 @@ const Profile = () => {
 							{...getFieldProps("businessName")}
 							className={style["text-input"]}
 						/>
-						{/* <InputField
-							id="email"
-							type="email"
-							label="Business email address"
-							variant="filled"
-							size="small"
-							margin="none"
-							placeholder=""
-							error={false}
-							helperText=""
-							{...getFieldProps("email")}
-							className={style["text-input"]}
-						/> */}
-						{/* <InputField
-							id="phoneNumber"
-							type="text"
-							label="Phone number"
-							variant="filled"
-							size="small"
-							margin="none"
-							placeholder="enter phone number"
-							error={false}
-							helperText=""
-							{...getFieldProps("phoneNumber")}
-							className={style["text-input"]}
-						/> */}
-						{/* <Box display="flex" alignItems={"center"} justifyItems={"flex-start"} width={"90%"}>Account Details</Box>
-						<InputField
-							id="accountName"
-							type="text"
-							label="Account name"
-							variant="filled"
-							size="small"
-							margin="none"
-							placeholder="enter bank account name"
-							error={false}
-							helperText=""
-							{...getFieldProps("accountName")}
-							className={style["text-input"]}
-						/>
-						<InputField
-							id="accountNumber"
-							type="text"
-							label="Account number"
-							variant="filled"
-							size="small"
-							margin="none"
-							placeholder="enter account number"
-							error={false}
-							helperText=""
-							{...getFieldProps("accountNumber")}
-							className={style["text-input"]}
-						/> */}
 						<Box display="flex" alignItems={"center"} justifyItems={"flex-start"} width={"90%"}>Contact Details</Box>
 						<InputField
 							id="city"
