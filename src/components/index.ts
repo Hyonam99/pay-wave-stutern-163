@@ -19,6 +19,8 @@ import CustomerList from "./main/CustomerList"
 import CustomerBar from "./builders/CustomerBar"
 import CustomerDetail from "./main/CustomerDetail";
 import LinkButton from "./builders/LinkButton"
+import ProfileForm from "./main/ProfileForm"
+import AccountForm from "./main/AccountForm";
 
 export {
 	CustomButton,
@@ -41,5 +43,7 @@ export {
 	CustomerList,
 	CustomerBar,
 	CustomerDetail,
-	LinkButton
+	LinkButton,
+	AccountForm,
+	ProfileForm
 };

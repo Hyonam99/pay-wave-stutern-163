@@ -48,3 +48,9 @@ export interface GenerateLinkDto {
     payerEmail: string
     amount: number
 }
+
+export interface AccountUpdateDTO {
+    accountName: string
+    accountNumber: string
+    bankCode: string
+}
