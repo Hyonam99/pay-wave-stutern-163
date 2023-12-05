@@ -7,11 +7,12 @@ import {
 	getBusinessData,
 	getInvoice,
 	updateBusiness,
+	updateAccountDetails
 } from "api/services";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { BusinessInfoType, MutationOptionsType, PaginationParams } from "interfaces/Types";
-import { GenerateLinkDto } from "interfaces/Interfaces";
+import { GenerateLinkDto, AccountUpdateDTO } from "interfaces/Interfaces";
 
 
 const invoice_Key = "invoice";
@@ -78,6 +79,29 @@ export const useUpdateBusinessInfo = (
 
 	return {
 		updateBusinessInfo: mutation.mutate,
+		isSuccess: mutation.isSuccess,
+		isError: mutation.isError,
+		isLoading: mutation.isPending,
+	};
+};
+
+export const useUpdateAccountDetails = (
+	options: MutationOptionsType = {},
+	token: string
+) => {
+	const mutation = useMutation({
+		mutationFn: (accountDTO: AccountUpdateDTO) =>
+		updateAccountDetails(accountDTO, token),
+		onSuccess: (data: any) => {
+			options.onSuccess && options.onSuccess(data);
+		},
+		onError: (error: AxiosError) => {
+			options.onError && options.onError(error);
+		},
+	});
+
+	return {
+		updateAccount: mutation.mutate,
 		isSuccess: mutation.isSuccess,
 		isError: mutation.isError,
 		isLoading: mutation.isPending,

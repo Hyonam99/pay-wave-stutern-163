@@ -34,4 +34,12 @@ const customer_Schema = Yup.object({
     customerEmail: Yup.string().email('Invalid email address').required('email is required'),
 })
 
-export {login_Schema, signup_Schema, invoice_Schema, customer_Schema}
+const account_Schema = Yup.object({
+    accountNumber: Yup.string().min(10, "account number cannot be less than 10 numbers").max(10, "account number cannot be more than 10 numbers")
+})
+
+const profile_Schema = Yup.object({
+    streetAddress: Yup.string().min(4, "treet address cannot be less than four characters")
+})
+
+export {login_Schema, signup_Schema, invoice_Schema, customer_Schema, account_Schema, profile_Schema}

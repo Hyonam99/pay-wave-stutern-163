@@ -4,9 +4,10 @@ import { Box, Alert, AlertColor } from "@mui/material";
 import { CustomButton, InputField } from "components";
 import { useFormik } from "formik";
 import { AuthContext } from "providers/AuthProvider";
-import { useGetBusinessData, useUpdateBusinessInfo } from "hooks/business";
+import { useGetBusinessData, useUpdateAccountDetails } from "hooks/business";
 import { AccountUpdateDTO } from "interfaces/Interfaces";
 import style from "styles/pages/profile.module.scss";
+import { account_Schema } from "utils/validationSchema";
 
 const AccountForm = () => {
 	const { token } = useContext(AuthContext);
@@ -18,7 +19,7 @@ const AccountForm = () => {
 		message: "",
 	});
 
-	const { updateBusinessInfo, isLoading, isError } = useUpdateBusinessInfo(
+	const { updateAccount, isLoading, isError } = useUpdateAccountDetails(
 		{
 			onSuccess: (data: serviceResponse) => {
 				console.log(data);
@@ -47,17 +48,18 @@ const AccountForm = () => {
 	};
 
 	const initial_Account_Values: AccountUpdateDTO = {
-		accountName: data?.businessName ?? "",
-		accountNumber: data?.city ?? "",
-		bankCode: data?.country ?? "",
+		accountName: data?.accountName ?? "",
+		accountNumber: data?.accountNumber ?? "",
+		bankCode: data?.bankCode ?? "",
 	};
 
 	const formik = useFormik<AccountUpdateDTO>({
 		initialValues: initial_Account_Values,
+		validationSchema: account_Schema,
 		validateOnBlur: true,
 		enableReinitialize: true,
 		onSubmit: (values) => {
-			updateBusinessInfo(values);
+			updateAccount(values);
 		},
 	});
 

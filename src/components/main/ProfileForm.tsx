@@ -7,6 +7,7 @@ import { AuthContext } from "providers/AuthProvider";
 import { useGetBusinessData, useUpdateBusinessInfo } from "hooks/business";
 import { BusinessInfoType } from "interfaces/Types";
 import style from "styles/pages/profile.module.scss";
+import { profile_Schema } from "utils/validationSchema";
 
 const ProfileForm = () => {
 	const { token } = useContext(AuthContext);
@@ -56,6 +57,7 @@ const ProfileForm = () => {
 
 	const formik = useFormik<BusinessInfoType>({
 		initialValues: initial_Customer_Values,
+        validationSchema: profile_Schema,
 		validateOnBlur: true,
 		enableReinitialize: true,
 		onSubmit: (values) => {
