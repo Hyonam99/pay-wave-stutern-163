@@ -81,7 +81,7 @@ const Register = () => {
 	}
 
 	return (
-		<Container className={style["registration-section"]}>
+		<Container className={style["registration-section"]} data-testid="registration-page-container">
 			<motion.div
 				initial={{ opacity: 0, scale: 0.5 }}
 				animate={{ opacity: 1, scale: 1 }}
@@ -115,8 +115,8 @@ const Register = () => {
 					</Alert>
 				)}
 
-				<form onSubmit={handleSubmit} className={style["registration-form"]}>
-					<Box className={style["registration-form_wrapper_inputs"]}>
+				<form onSubmit={handleSubmit} className={style["registration-form"]} data-testid="registration-page-form">
+					<Box className={style["registration-form_wrapper_inputs"]} data-testid="registration-form-wrapper">
 						<InputField
 							id="firstName"
 							type="text"
@@ -233,8 +233,9 @@ const Register = () => {
 											onMouseDown={handleMouseDownPassword}
 											edge="end"
 											className={style.toggle_password}
+											data-testid="toggle-password-btn"
 										>
-											{showPassword ? <IoMdEyeOff /> : <IoMdEye />}
+											{showPassword ? <IoMdEyeOff title="toggle-closed"/> : <IoMdEye title="toggle-open"/>}
 										</IconButton>
 									</InputAdornment>
 								),
