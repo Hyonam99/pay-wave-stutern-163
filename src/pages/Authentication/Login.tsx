@@ -63,7 +63,7 @@ const Login = () => {
 	};
 
 	return (
-		<Container className={style["registration-section"]}>
+		<Container className={style["registration-section"]} data-testid="login-page-container">
 			<motion.div
 				initial={{ opacity: 0, scale: 0.5 }}
 				animate={{ opacity: 1, scale: 1 }}
@@ -86,8 +86,8 @@ const Login = () => {
 					</Alert>
 				)}
 
-				<form onSubmit={handleSubmit} className={style["login-form"]}>
-					<Box className={style["login-form_wrapper_inputs"]}>
+				<form onSubmit={handleSubmit} className={style["login-form"]} data-testid="login-page-form">
+					<Box className={style["login-form_wrapper_inputs"]} data-testid="login-form-wrapper">
 						<InputField
 							id="email"
 							label="Email Address"
@@ -125,8 +125,10 @@ const Login = () => {
 									onMouseDown={handleMouseDownPassword}
 									edge="end"
 									className={style.toggle_password}
+									data-testid="toggle-password-btn"
+
 								>
-									{showPassword ? <IoMdEyeOff /> : <IoMdEye />}
+									{showPassword ? <IoMdEyeOff title="toggle-closed"/> : <IoMdEye title="toggle-open"/>}
 								</IconButton>
 							</InputAdornment>, disableUnderline: true}}
 							{...getFieldProps("password")}
@@ -134,7 +136,7 @@ const Login = () => {
 					</Box>
 					<Box className={style["login-form_acknowledgement"]}>
 						<Box display="flex" alignItems="center" gap=".6rem">
-							<Checkbox />
+							<Checkbox title="check-box"/>
 							<span>Remember me</span>
 						</Box>
 						<Link to="#" className={style["fgp-link"]}>
