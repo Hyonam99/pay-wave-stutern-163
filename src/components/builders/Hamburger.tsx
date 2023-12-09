@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Avatar } from "@mui/material";
 import { CgMenuCheese } from "react-icons/cg";
 import { MdOutlineCancel } from "react-icons/md";
-import { logoutBusiness } from "api/servicesX";
+import { logoutBusiness } from "api/services/auth";
 import { AuthContext } from "providers/AuthProvider";
 import Logo from "./Logo";
 import CustomButton from "./Button";

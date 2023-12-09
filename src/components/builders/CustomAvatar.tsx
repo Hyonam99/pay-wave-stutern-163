@@ -9,7 +9,7 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import { AiOutlineLogout } from "react-icons/ai";
 import { MdNotificationsNone } from "react-icons/md";
-import { logoutBusiness } from "api/servicesX";
+import { logoutBusiness } from "api/services/auth";
 import { Link } from "react-router-dom";
 
 const CustomAvatar = () => {
@@ -29,15 +29,16 @@ const CustomAvatar = () => {
 
 	return (
 		<>
-			<Box>
+			<Box data-testid="avatar-container">
 				<Tooltip title="Account settings">
 					<IconButton
 						onClick={handleClick}
 						aria-controls={open ? "account-menu" : undefined}
 						aria-haspopup="true"
 						aria-expanded={open ? "true" : undefined}
+						data-testid="avatar-icon-button"
 					>
-						<Avatar sx={{ width: "32px", height: "32px", marginX: "8px" }} />
+						<Avatar sx={{ width: "32px", height: "32px", marginX: "8px" }} data-testid="avatar-component"/>
 					</IconButton>
 				</Tooltip>
 			</Box>
@@ -63,6 +64,7 @@ const CustomAvatar = () => {
 				}}
 				transformOrigin={{ horizontal: "right", vertical: "top" }}
 				anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+				data-testid="avatar-dropdown-menu"
 			>
 				<Link to="/profile">
 					<MenuItem onClick={handleClose}>
