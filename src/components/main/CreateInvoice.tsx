@@ -7,7 +7,8 @@ import { Box, Button, TextField, Alert, AlertColor } from "@mui/material";
 import { MdOutlineCancel } from "react-icons/md";
 import Autocomplete from "@mui/material/Autocomplete";
 import { AuthContext } from "providers/AuthProvider";
-import { useCreateInvoice, useGetAllCustomers } from "hooks/customer";
+import { useGetAllCustomers } from "hooks/customer";
+import { useCreateInvoice } from "hooks/invoice";
 import { CustomerInfoType, serviceResponse } from "interfaces/Types";
 import style from "styles/components/main/CreateInvoice.module.scss";
 

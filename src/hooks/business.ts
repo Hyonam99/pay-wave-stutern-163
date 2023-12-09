@@ -2,20 +2,16 @@
 import { useQuery } from "@tanstack/react-query";
 import {
 	generatePaymentLink,
-	getAllInvoices,
 	getAllTransactions,
 	getBusinessData,
-	getInvoice,
 	updateBusiness,
 	updateAccountDetails
-} from "api/services";
+} from "api/services/business";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { BusinessInfoType, MutationOptionsType, PaginationParams } from "interfaces/Types";
 import { GenerateLinkDto, AccountUpdateDTO } from "interfaces/Interfaces";
 
-
-const invoice_Key = "invoice";
 const transaction_Key = "transactions";
 const business_Key = `business`;
 
@@ -33,34 +29,6 @@ export const useGetBusinessData = (token: string) => {
 	};
 };
 
-export const useGetInvoice = (invoiceId: number, token: string) => {
-
-	const response = useQuery({
-		queryKey: [`single-invoiceId-${invoiceId}`],
-		queryFn: () => getInvoice(invoiceId, token),
-	});
-
-	return {
-		isError: response.isError,
-		isLoading: response.isLoading,
-		isSuccess: response.isSuccess,
-		data: response.data ? response.data?.data : undefined,
-	};
-};
-
-export const useGetAllInvoice = (token: string) => {
-	const response = useQuery({
-		queryKey: [invoice_Key],
-		queryFn: () => getAllInvoices(token),
-	});
-
-	return {
-		isError: response.isError,
-		isLoading: response.isLoading,
-		isSuccess: response.isSuccess,
-		data: response.data ? response.data?.data : undefined,
-	};
-};
 
 export const useUpdateBusinessInfo = (
 	options: MutationOptionsType = {},

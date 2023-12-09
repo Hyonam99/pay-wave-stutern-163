@@ -9,7 +9,7 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import { AiOutlineLogout } from "react-icons/ai";
 import { MdNotificationsNone } from "react-icons/md";
-import { logoutBusiness } from "api/services";
+import { logoutBusiness } from "api/servicesX";
 import { Link } from "react-router-dom";
 
 const CustomAvatar = () => {

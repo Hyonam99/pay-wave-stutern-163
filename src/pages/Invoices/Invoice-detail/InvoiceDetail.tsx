@@ -1,8 +1,9 @@
 import React, { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "providers/AuthProvider";
-import { useGeneratePaymentLink, useGetInvoice } from "hooks/business";
+import { useGeneratePaymentLink } from "hooks/business";
 import { useGetAllCustomers } from "hooks/customer";
+import { useGetInvoice } from "hooks/invoice";
 import { convertTimestamp, formatCurrency } from "utils/helpers";
 import { motion } from "framer-motion";
 import AuthLayout from "layouts/AuthLayout";

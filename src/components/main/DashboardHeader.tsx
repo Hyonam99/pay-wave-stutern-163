@@ -11,7 +11,7 @@ import { FaRegMoneyBillAlt } from "react-icons/fa";
 import { LuUsers2 } from "react-icons/lu";
 import { RiTodoLine } from "react-icons/ri";
 import { MdOutlinePendingActions } from "react-icons/md";
-import { useGetAllInvoice } from "hooks/business";
+import { useGetAllInvoice } from "hooks/invoice";
 import { formatCurrency } from "utils/helpers";
 import { useGetAllCustomers } from "hooks/customer";
 

@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
 import { AuthContext } from "providers/AuthProvider";
-import { useGetAllInvoice } from "hooks/business";
+import { useGetAllInvoice } from "hooks/invoice";
 import { InvoiceDetailsType } from "interfaces/Types";
 import {EmptyContent, InvoiceBar} from "components";
 

@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useMutation } from "@tanstack/react-query";
-import { loginBusiness, signupBusiness } from "api/services";
+import { loginBusiness, signupBusiness } from "api/services/auth";
 import { AxiosError } from "axios";
 import { LoginDTO, SignupDTO } from "interfaces/Interfaces";
 import { MutationOptionsType } from "interfaces/Types";

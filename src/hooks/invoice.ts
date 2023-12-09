@@ -1,24 +1,20 @@
-/* eslint-disable no-unused-vars */
-import { useMutation, useQuery } from "@tanstack/react-query";
-import {
-	createCustomer,
-	getAllCustomers,
-	getCustomer,
-} from "api/services/customer";
+import { useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
+import { createInvoice, getAllInvoices, getInvoice } from "api/services/invoice";
+import { InvoiceItemsType, MutationOptionsType } from 'interfaces/Types';
 import { AxiosError } from "axios";
-import { CreateCustomerDto } from "interfaces/Interfaces";
-import { MutationOptionsType } from "interfaces/Types";
-
-const key = "customer";
 
 
-export const useCreateCustomer = (
+const invoice_Key = "invoice";
+
+export const useCreateInvoice = (
 	options: MutationOptionsType = {},
+	customerId: number,
 	token: string
 ) => {
 	const mutation = useMutation({
-		mutationFn: (userData: CreateCustomerDto) =>
-			createCustomer(userData, token),
+		mutationFn: (invoiceData: InvoiceItemsType[]) =>
+			createInvoice(invoiceData, customerId, token),
 		onSuccess: (data: any) => {
 			options.onSuccess && options.onSuccess(data);
 		},
@@ -28,17 +24,17 @@ export const useCreateCustomer = (
 	});
 
 	return {
-		createCustomer: mutation.mutate,
+		createInvoice: mutation.mutate,
 		isSuccess: mutation.isSuccess,
 		isError: mutation.isError,
 		isLoading: mutation.isPending,
 	};
 };
 
-export const useGetAllCustomers = (token: string) => {
+export const useGetAllInvoice = (token: string) => {
 	const response = useQuery({
-		queryKey: [key],
-		queryFn: () => getAllCustomers(token),
+		queryKey: [invoice_Key],
+		queryFn: () => getAllInvoices(token),
 	});
 
 	return {
@@ -49,10 +45,11 @@ export const useGetAllCustomers = (token: string) => {
 	};
 };
 
-export const useGetCustomer = (email: string, token: string) => {
+export const useGetInvoice = (invoiceId: number, token: string) => {
+
 	const response = useQuery({
-		queryKey: [key],
-		queryFn: () => getCustomer(email, token),
+		queryKey: [`single-invoiceId-${invoiceId}`],
+		queryFn: () => getInvoice(invoiceId, token),
 	});
 
 	return {
